@@ -1,7 +1,20 @@
 import { Register } from "./register";
+import { Route, Routes, useNavigate } from 'react-router-dom';
 
+
+export function RedirectReactRouterExample() {
+  return (
+    <Routes>
+      <Route path="/" element={<Login />} />
+      <Route path="register" element={<Register />} />
+    </Routes>
+  );
+}
 
 export function Login () {
+  const navigate = useNavigate();
+    
+
     return (
         
         <div>
@@ -27,7 +40,7 @@ export function Login () {
           </div>
           <div className="right">
             <h5>Login</h5>
-            <p>Don't have an account? <a href="/register">Create Your Account</a> it takes less than a minute</p>
+            <p>Don't have an account? <a href="dummy" >Create Your Account</a> it takes less than a minute</p>
             <div className="inputs">
               <input type="text" placeholder="user name" />
               <br />
@@ -42,7 +55,7 @@ export function Login () {
               <p>forgot password?</p>
             </div>
             <br />
-            <button className="login" onClick={Register}>Login</button>
+            <button className="login">Login</button>
           </div>
         </div> 
         </form> 

@@ -1,8 +1,14 @@
 
 import './App.css';
-import { Login } from './login';
+import { Login, RedirectReactRouterExample } from './login';
+import { Register } from './register';
+
 
 function App() {
+   //get user data on submit
+  
+
+  
   return (
     <>
     <Login/>
