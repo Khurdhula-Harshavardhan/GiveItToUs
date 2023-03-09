@@ -1,38 +1,168 @@
-.App {
-  text-align: center;
+body {
+  background-image: linear-gradient(135deg, #8aa1d5 10%, #051bf4 100%);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  font-family: "Open Sans", sans-serif;
+  color: #333333;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.box-form {
+  margin: 0 auto;
+  width: 80%;
+  background: #FFFFFF;
+  border-radius: 10px;
+  overflow: hidden;
   display: flex;
-  flex-direction: column;
+  flex: 1 1 100%;
+  align-items: stretch;
+  justify-content: space-between;
+  box-shadow: 0 0 20px 6px #090b6f85;
+}
+@media (max-width: 980px) {
+  .box-form {
+    flex-flow: wrap;
+    text-align: center;
+    align-content: center;
+    align-items: center;
+  }
+}
+.box-form div {
+  height: auto;
+}
+.box-form .left {
+  color: #FFFFFF;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url("https://www.zarla.com/images/zarla-goodforall-1x1-2400x2400-20210702-c8f4kr9dhmxbmftj6m4k.png?crop=1:1,smart&width=250&dpr=2");
+  overflow: hidden;
+}
+.box-form .left .overlay {
+  padding: 30px;
+  width: 100%;
+  height: 100%;
+  background: #5961f9ad;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.box-form .left .overlay h1 {
+  font-size: 10vmax;
+  line-height: 1;
+  font-weight: 900;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+.box-form .left .overlay nav p {
+  margin-top: 30px;
+  font-weight: 900;
+}
+.box-form .left .overlay nav a {
+  text-align: center;
+  background: #000308;
+  color: #FFFFFF;
+  margin: 30px 30px 10px;
+  padding: 16px 55px;
+  border-radius: 150px;
+  display: inline-block;
+  box-shadow: 0 4px 7px 2px #042d46;
+  text-decoration:none;
+}
+
+.box-form .left .overlay nav a:hover{
+  color: goldenrod;
+}
+.box-form .right {
+  padding: 40px;
+  overflow: hidden;
+}
+@media (max-width: 980px) {
+  .box-form .right {
+    width: 100%;
+  }
+}
+.box-form .right h5 {
+  font-size: 6vmax;
+  line-height: 0;
+}
+.box-form .right p {
+  font-size: 14px;
+  color: #B0B3B9;
+}
+.box-form .right .inputs {
+  overflow: hidden;
+}
+.box-form .right input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 25px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  border-bottom: 2px solid #B0B3B9;
+}
+.box-form .right .remember-me--forget-password {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+}
+.box-form .right .remember-me--forget-password input {
+  margin: 0;
+  margin-right: 7px;
+  width: auto;
+}
+.box-form .right button {
+  float: right;
+  color: #fff;
+  font-size: 16px;
+  padding: 12px 35px;
+  border-radius: 50px;
+  border: 0;
+  outline: 0;
+  box-shadow: 0px 4px 2px 0px rgba(0,0,0,.7);
+  background-image: linear-gradient(135deg, #3254a4 10%, #041bf4 100%);
+}
+.box-form .right .login:hover {
+  background-image: linear-gradient(135deg, #3254a4 1%, #041bf4 10%);
+  
+}
+label {
+  display: block;
+  position: relative;
+  margin-left: 30px;
 }
 
-.App-link {
-  color: #61dafb;
+label::before {
+  content: ' \f00c';
+  position: absolute;
+  font-family: Arial, Helvetica, sans-serif;
+  background: transparent;
+  border: 3px solid #3254a4;
+  border-radius: 4px;
+  color: transparent;
+  left: -30px;
+  transition: all 0.2s linear;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+label:hover::before {
+  font-family: Arial, Helvetica, sans-serif;
+  content: ' \f00c';
+  color: #fff;
+  cursor: pointer;
+  background: #3254a4;
+}
+
+label:hover::before .text-checkbox {
+  background: #041bf4;
+}
+
+label span.text-checkbox {
+  display: inline-block;
+  height: auto;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s linear;
+}
+
+label input[type="checkbox"] {
+  display: none;
 }

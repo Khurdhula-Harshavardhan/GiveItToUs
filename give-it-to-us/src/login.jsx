@@ -1,3 +1,6 @@
+import { Register } from "./register";
+
+
 export function Login () {
     return (
         
@@ -5,6 +8,9 @@ export function Login () {
         <meta charSet="UTF-8" />
         <title>GITS - Login Page</title>
         <link rel="stylesheet" href="Login_page.css" />
+        <form className="loginForm">
+
+        
         <div className="box-form">
           <div className="left">
             <div className="overlay">
@@ -21,7 +27,7 @@ export function Login () {
           </div>
           <div className="right">
             <h5>Login</h5>
-            <p>Don't have an account? <a href="Registration_page.html">Create Your Account</a> it takes less than a minute</p>
+            <p>Don't have an account? <a href="/register">Create Your Account</a> it takes less than a minute</p>
             <div className="inputs">
               <input type="text" placeholder="user name" />
               <br />
@@ -33,13 +39,16 @@ export function Login () {
                 <input type="checkbox" name="item" defaultChecked />
                 <span className="text-checkbox">Remember me</span>
               </label>
-              <p>forget password?</p>
+              <p>forgot password?</p>
             </div>
             <br />
-            <button>Login</button>
+            <button className="login" onClick={Register}>Login</button>
           </div>
-        </div>  
+        </div> 
+        </form> 
       </div>
+      
+      
       
       );
     }
