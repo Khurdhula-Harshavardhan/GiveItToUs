@@ -1,6 +1,10 @@
 import "./Register.css"
-
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react"
+import userEvent from "@testing-library/user-event";
 function Register(){
+
+const navigate = useNavigate();
 
 const slidePage = document.querySelector(".slide-page");
 const nextBtnFirst = document.querySelector(".firstNext");
@@ -58,7 +62,7 @@ submitBtn.addEventListener("click", function(){
   current += 1;
   setTimeout(function(){
     alert("Your Form Successfully Signed up");
-    location.reload();
+    navigate('/', {replace: true});
   },800);
 });
 
