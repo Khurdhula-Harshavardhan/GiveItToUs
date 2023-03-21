@@ -128,8 +128,8 @@
     line-height: 25px;
   }
   .progress-bar .step .bullet.active{
-    border-color: #3254a4;
-    background: #3254a4;
+    border-color: #32a454;
+    background: #32a447;
   }
   .progress-bar .step .bullet span{
     position: absolute;
