@@ -1,11 +1,12 @@
 import "./Register.css"
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react"
-import userEvent from "@testing-library/user-event";
+
 function Register(){
 
 const navigate = useNavigate();
 
+useEffect(() => {
 const slidePage = document.querySelector(".slide-page");
 const nextBtnFirst = document.querySelector(".firstNext");
 const prevBtnSec = document.querySelector(".prev-1");
@@ -101,12 +102,14 @@ prevBtnFifth.addEventListener("click", function(event){
     progressText[current - 2].classList.remove("active");
     current -= 1;
   });
+});
+
 
 return(
 <>
   
   <div className="container">
-    <header> GiveItToUs Signup Form</header>
+    <header>Sign Up</header>
     <div className="progress-bar">
       <div className="step">
         <p>Name</p>
