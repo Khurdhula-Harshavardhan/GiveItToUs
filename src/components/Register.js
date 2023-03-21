@@ -153,11 +153,11 @@ return(
           <div className="title">Basic Info:</div>
           <div className="field">
             <div className="label">First Name</div>
-            <input type="text" />
+            <input id="firstName" type="text" required/>
           </div>
           <div className="field">
             <div className="label">Last Name</div>
-            <input type="text" />
+            <input id="lastName" type="text" required/>
           </div>
           <div className="field">
             <button className="firstNext next">Next</button>
@@ -167,11 +167,11 @@ return(
           <div className="title">Contact Info:</div>
           <div className="field">
             <div className="label">Email Address</div>
-            <input type="text" />
+            <input id="emailAddress" type="email" required/>
           </div>
           <div className="field">
             <div className="label">Phone Number</div>
-            <input type="Number" />
+            <input id="phoneNumber" type="Number" required/>
           </div>
           <div className="field btns">
             <button className="prev-1 prev">Previous</button>
@@ -182,7 +182,7 @@ return(
           <div className="title">Address</div>
           <div className="field">
             <div className="label">Line 1</div>
-            <input type="text" />
+            <input id="addLineOne" type="text" required/>
           </div>
           <div className="field">
             <div className="label">Line 2</div>
@@ -197,11 +197,11 @@ return(
           <div className="title">Date of Birth:</div>
           <div className="field">
             <div className="label">Date</div>
-            <input type="date" />
+            <input id="dob" type="date" required/>
           </div>
           <div className="field">
             <div className="label">Gender</div>
-            <select>
+            <select id="gender" required>
               <option>Male</option>
               <option>Female</option>
               <option>Other</option>
@@ -216,11 +216,15 @@ return(
           <div className="title">Login Details:</div>
           <div className="field">
             <div className="label">Username</div>
-            <input type="text" />
+            <input id="username" type="text" required/>
           </div>
           <div className="field">
             <div className="label">Password</div>
-            <input type="password" />
+            <input id="password" type="password" required/>
+          </div>
+          <div className="field">
+            <div className="label">Confirm Password</div>
+            <input id="confirmPassword" type="password" required/>
           </div>
           <div className="field btns">
             <button className="prev-4 prev">Previous</button>
