@@ -1,0 +1,196 @@
+body{
+    background: -webkit-linear-gradient(bottom, #051bf4, #8aa1d5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Open Sans", sans-serif;
+    
+}
+.container{
+    margin:50px;
+    background-color: white;
+    width: 870px;
+    text-align: left;
+    border-radius: 5px;
+   
+    box-shadow: 0 0 20px 6px #090b6f85;
+    padding: 10px 50px 50px 50px;
+ 
+    
+}
+.container .post h1{
+    font-size: 30px;
+    text-align: center;
+    padding: 40px 0px 60px;
+    
+}
+.container .price,.contact{
+    border-top: 1px solid rgb(97, 97, 174);
+    padding: 12px 0px 50px;
+}
+
+.container .product-details h1{
+    font-size: 23px;
+    padding:15px 0px 17px;  
+}
+.container .product-details div{
+    font-size: 18px;
+}
+.container .images h1{
+    font-size: 23px;
+    padding:15px 0px 17px;  
+}
+.container .contact h1{
+    font-size: 23px;
+    padding:15px 0px 17px;  
+}
+.container .price h1{
+    font-size: 23px;
+    padding:15px 0px 17px;  
+}
+
+
+.container .price span{
+    font-size: 13px;
+    color: rgb(123, 118, 118);
+}
+
+.container .product-details{
+    padding: 0px 0px 40px;
+}
+.container .product-details .category{
+    padding:12px 0px 30px;
+   
+}
+
+.container .product-details .category select{
+    font-size: 17px;
+   
+}
+.container .product-details .field1 input[type=text]{
+    width: 100%;
+    padding: 12px 20px 50px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    height: 1px;
+}
+.container .product-details .field2 input[type=text]{
+    width: 100%;
+    padding: 12px 20px 50px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    height: 200px;
+    
+}
+
+
+
+.container .product-details form{
+    line-height: 3;
+    
+}
+.container .images{
+    border-top: 1px solid rgb(97, 97, 174);
+    padding: 17px 0px 200px;
+}
+
+
+
+.container .contact input[type=text]{
+    width: 100%;
+    padding: 12px 20px 50px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    height: 5px;
+}
+.container .submit button{
+    
+    
+    color:white;
+    background-image: linear-gradient(135deg, #3254a4 10%, #3254a4 100%);
+    border: 0;
+    outline: 0;
+    box-shadow: 0px 4px 2px 0px rgba(0,0,0,.7);
+    font-size: 20px;
+    padding: 12px 5px;
+    margin: 20px;
+    width:100%;
+    
+}
+.container button:hover {
+    background-image: linear-gradient(135deg, #4a1fe4 10%, #0943e2 100%); }
+
+.container    .tc {
+        display: block;
+        position: relative;
+        padding-left: 400px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 16px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        
+      }
+      
+      .tc input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+        
+      }
+      
+      
+      .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        background-color: #eee;
+        margin-left: 360px;;
+      }
+      
+     
+      .tc:hover input ~ .checkmark {
+        background-color: #ccc;
+      }
+      
+      
+      .container .tc input:checked ~ .checkmark {
+        background-color: #2196F3;
+      }
+      
+      .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+      }
+      
+      .container .tc input:checked ~ .checkmark:after {
+        display: block;
+      }
+      
+      .container .tc .checkmark:after {
+        left: 9px;
+        top: 3.5px;
+        width: 3px;
+        height: 8.5px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+      }
