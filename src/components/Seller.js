@@ -1,9 +1,16 @@
 import './Seller.css'
 import { BrowserRouter as Router, Routes, Route, Switch, Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
 
 function Seller(){
+  
+  const [rememberMe, setRememberMe] = useState(false);
   const navigate = useNavigate();
+
+  function handleRememberMeChange(event) {
+    setRememberMe(event.target.checked);
+  }
     return(
         <>
   
@@ -15,8 +22,9 @@ function Seller(){
           Welcome to GiveItToUs. Your portal to give away to the poor or give us
           something to sell for you. Login or Signup to Begin
         </p>
-        <span><Link to='/'>Go to home page </Link></span>
-          
+        <span>
+          <Link to='/'>Go to home page </Link>
+          </span>
       </div>
     </div>
     <div className="right">
@@ -30,10 +38,13 @@ function Seller(){
       <br />
       <br />
       <div className="remember-me--forget-password">
-        <label>
-          <input type="checkbox" name="item" defaultChecked="" />
+        <p>
+          <input type="checkbox"
+                name="rememberMe"
+                checked={rememberMe}
+                onChange={handleRememberMeChange} />
           <span className="text-checkbox">Remember me</span>
-        </label>
+        </p>
         <p>forget password?</p>
       </div>
       <br />
@@ -47,4 +58,4 @@ function Seller(){
     );
 }
 
-export default  Seller;
+export default Seller;

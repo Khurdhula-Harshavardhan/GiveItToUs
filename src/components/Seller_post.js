@@ -1,8 +1,46 @@
 import './Seller_post.css'
-function Seller_post(){
+import { useState } from 'react';
 
+function Seller_post() {
+  const [rememberMe, setRememberMe] = useState(false);
+  
+
+  function handleRememberMeChange(event) {
+    setRememberMe(event.target.checked);
+  }
+  
+  const [previewImages, setPreviewImages] = useState([]);
+
+  const defaultImages = [
+    'https://www.allstate.com/resources/Allstate/images/allstate-benefits/icons/uploadicon.png?v=13d72a4f-3f0a-4d4e-2c6f-5b1ccd06c986.jpg',
+    'https://www.allstate.com/resources/Allstate/images/allstate-benefits/icons/uploadicon.png?v=13d72a4f-3f0a-4d4e-2c6f-5b1ccd06c986.jpg',
+    'https://www.allstate.com/resources/Allstate/images/allstate-benefits/icons/uploadicon.png?v=13d72a4f-3f0a-4d4e-2c6f-5b1ccd06c986.jpg',
+    'https://www.allstate.com/resources/Allstate/images/allstate-benefits/icons/uploadicon.png?v=13d72a4f-3f0a-4d4e-2c6f-5b1ccd06c986.jpg',
+    'https://www.allstate.com/resources/Allstate/images/allstate-benefits/icons/uploadicon.png?v=13d72a4f-3f0a-4d4e-2c6f-5b1ccd06c986.jpg',
+    'https://www.allstate.com/resources/Allstate/images/allstate-benefits/icons/uploadicon.png?v=13d72a4f-3f0a-4d4e-2c6f-5b1ccd06c986.jpg',
+  ];
+
+  const handleFileInputChange = (event) => {
+    const files = event.target.files;
+    if (files.length > 6) {
+      alert('Only up to 6 files can be uploaded!');
+      return;
+    }
+    const newPreviewImages = [];
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      const reader = new FileReader();
+      reader.onload = () => {
+        newPreviewImages.push(reader.result);
+        setPreviewImages([...previewImages, ...newPreviewImages]);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+  
+  
     return(
-        <>
+        
   
   <div className="container">
     <div className="post">
@@ -10,33 +48,32 @@ function Seller_post(){
     </div>
     <div className="product-details">
       <h1>Product Details</h1>
-      <form>
+     
         <div className="field1">
-          <label>Title:</label>
+          <p>Title:</p>
           <input type="text" id="fname" name="firstname" placeholder="" />
         </div>
         <div className="field2">
-          <label htmlFor="lname">Description:</label>
+          <p htmlFor="lname">Description:</p>
           <input type="text" id="lname" name="lastname" placeholder="" />
         </div>
-      </form>
+      
       <div className="category">
         <p>Select Category: </p>
         <select>
           <option>select a category</option>
           <option>Footwear</option>
-          <option>accesories</option>
-          <option>clothes</option>
+          <option>Accesories</option>
+          <option>Clothes</option>
         </select>
       </div>
     
-      <form action="/action_page.php">
+      <form>
         
-        <input type="radio" id="sell" name="select" />
-        <label>Sell</label>
-        
-        <input type="radio" id="give-away" name="select"/>
-        <label>Give away</label>
+        <input type="radio" id="sell" />
+        <span>Sell</span>
+        <input type="radio" id="give-away"/>
+        <span>Give away</span>
       </form>
     </div>
     <div className="price">
@@ -46,6 +83,26 @@ function Seller_post(){
     </div>
     <div className="images">
       <h1>Upload Images</h1>
+      <form >
+      <p for="file-upload">Choose a file:</p>
+        <input
+          type="file"
+          id="file-upload"
+          accept="image/*"
+          multiple
+          onChange={handleFileInputChange}
+        />
+        <div>
+        {[...defaultImages.slice(0, 6 - previewImages.length), ...previewImages].map((previewImage, index) => (
+          <img
+            key={index}
+            src={previewImage}
+            alt={`Preview image ${index}`}
+            style={{ width: '100px', height: '100px', objectFit: 'cover' }}
+          />
+        ))}
+        </div>
+      </form>
     </div>
     <div className="contact">
       <h1>Contact Details</h1>
@@ -54,16 +111,19 @@ function Seller_post(){
       <p>Address line 2:</p>
       <input type="text" placeholder=" " />
     </div>
-    <label className="tc">
+    <p className="tc">
       Accept <a href='/tc'>terms and conditions</a>
-      <input type="checkbox" unchecked="unchecked" />
+      <input type="checkbox"
+                name="rememberMe"
+                checked={rememberMe}
+                onChange={handleRememberMeChange} />
       <span className="checkmark" />
-    </label>
+    </p>
     <div className="submit">
       <button>Submit</button>
     </div>
   </div>
-</>
+
 
 
     );

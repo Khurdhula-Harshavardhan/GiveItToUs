@@ -1,10 +1,19 @@
 import './Login.css'
 import { BrowserRouter as Router, Routes, Route, Switch, Link } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
 
 function Login(){
+  
+  const [rememberMe, setRememberMe] = useState(false);
+  const navigate = useNavigate();
+
+  function handleRememberMeChange(event) {
+    setRememberMe(event.target.checked);
+  }
     return(
         <>
-  
+  <div id="login">
   <div className="box-form">
     <div className="left">
       <div className="overlay">
@@ -43,15 +52,21 @@ function Login(){
       <br />
       <br />
       <div className="remember-me--forget-password">
-        <label>
-          <input type="checkbox" name="item" defaultChecked="" />
+        <p>
+          <input type="checkbox"
+                name="rememberMe"
+                checked={rememberMe}
+                onChange={handleRememberMeChange} />
           <span className="text-checkbox">Remember me</span>
-        </label>
+        </p>
         <p>forget password?</p>
       </div>
       <br />
-      <button>Login</button>
+      <button  onClick={() => {
+          navigate("/Products");
+        }}>Login</button>
     </div>
+  </div>
   </div>
 </>
 

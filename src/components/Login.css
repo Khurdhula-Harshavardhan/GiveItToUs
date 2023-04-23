@@ -1,4 +1,4 @@
-body {
+#login body {
     background-image: linear-gradient(135deg, #8aa1d5 10%, #051bf4 100%);
     background-size: cover;
     background-repeat: no-repeat;
@@ -7,7 +7,7 @@ body {
     color: #333333;
   }
   
-  .box-form {
+  #login  .box-form {
     margin: 0 auto;
     width: 80%;
     background: #FFFFFF;
