@@ -4,6 +4,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Seller from "./components/Seller";
 import Admin from "./components/Admin";
+import ProductsPage from './components/ProductsPage';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/register" element={<Register/>} />
           <Route path="/gmail" element={<Gmail/>} />
           <Route path="/seller" element={<Seller/>} />
+          <Route path="/products" element={<ProductsPage/>} />
     </Routes>
   </Router>
   );
