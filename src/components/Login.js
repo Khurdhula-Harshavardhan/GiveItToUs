@@ -47,7 +47,7 @@ function Login(){
           <input type="checkbox" name="item" defaultChecked="" />
           <span className="text-checkbox">Remember me</span>
         </label>
-        <p>forget password?</p>
+        <p>forgot password?</p>
       </div>
       <br />
       <button>Login</button>
