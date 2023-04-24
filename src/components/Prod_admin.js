@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Switch, Link } from 'react-rout
 function Prod_admin(){
     return(<>
         <title>Products</title>
-        <link rel="stylesheet" type="text/css" href="products.css" />
+        <link rel="stylesheet" type="text/css" href="Prod_admin.css />
         <header>
           <h1>Products</h1>
           <nav>
