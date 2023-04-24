@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Switch, Link } from 'react-rout
 function Cust(){
     return(<>
         <title>Customers</title>
-        <link rel="stylesheet" type="text/css" href="cust.css" />
+        <link rel="stylesheet" type="text/css" href="Cust.css" />
         <header>
           <h1>Customers</h1>
           <nav>
