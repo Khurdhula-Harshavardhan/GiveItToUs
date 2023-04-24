@@ -36,7 +36,7 @@ function Login(){
         than a minute
       </p>
       <div className="inputs">
-        <input type="text" placeholder="user name" />
+        <input type="text" placeholder="Username" />
         <br />
         <input type="password" placeholder="password" />
       </div>
