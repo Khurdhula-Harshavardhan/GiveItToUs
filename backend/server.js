@@ -15,7 +15,7 @@ mongoose.connect(process.env.MONGODB_URI, {
   useUnifiedTopology: true,
   useCreateIndex: true,
   ssl: true,
-  sslCA: [require('fs').readFileSync('<path-to-mongodb-atlas-ca-certificate>')], // Replace with the path to your downloaded CA certificate
+  sslCA: [require('fs').readFileSync('X509-cert-6415171768107886158.pem')], // Replace with the path to your downloaded CA certificate
 });
 
 const db = mongoose.connection;
