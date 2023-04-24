@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Settings</title>
+	<link rel="stylesheet" type="text/css" href="reply.css">
+</head>
+<body>
+	<header>
+		<h1>Settings</h1>
+		<nav>
+			<ul>
+				<li><a href="dashboard.html">Dashboard</a></li>
+				<li><a href="products.html">Products</a></li>
+				<li><a href="order.html">Orders</a></li>
+				<li><a href="cust.html">Customers</a></li>
+				<li><a href="reply.html">Customer Queries</a></li>
+			</ul>
+		</nav>
+	</header>
+	<main>
+		<div class="response-page-container">
+			<h2>Customer Query Response</h2>
+			<div class="form-container">
+				<label for="customer-select">Select a Customer:</label>
+				<select id="customer-select">
+					<option value="">--Select a Customer--</option>
+					<option value="John Doe">John Doe</option>
+					<option value="Jane Smith">Jane Smith</option>
+					<option value="Bob Johnson">Bob Johnson</option>
+					<!-- Add more options for additional customers -->
+				</select>
+				<label for="subject-input">Subject:</label>
+				<input type="text" id="subject-input">
+				<label for="message-input">Message:</label>
+				<textarea id="message-input"></textarea>
+				<button id="send-button">Send Response</button>
+			</div>
+		</div>
+		
+	</main>
+	<footer>
+		<p>GiveItToUs E-commerce Website.</p>
+	</footer>
+</body>
+</html>
