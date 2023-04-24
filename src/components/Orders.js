@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Switch, Link } from 'react-rout
 function Orders(){
     return(<>
         <title>Orders Page</title>
-        <link rel="stylesheet" type="text/css" href="order.css" />
+        <link rel="stylesheet" type="text/css" href="Orders.css" />
         <header>
           <h1>Orders</h1>
           <nav>
