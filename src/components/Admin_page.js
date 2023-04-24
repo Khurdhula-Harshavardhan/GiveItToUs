@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Routes, Route, Switch, Link } from 'react-rout
 function Admin_page(){
     return(<>
         <title>Admin Page</title>
-        <link rel="stylesheet" type="text/css" href="admin.css" />
+        <link rel="stylesheet" type="text/css" href="Admin_page.css" />
         <header>
           <h1>Admin Page</h1>
           <nav>
