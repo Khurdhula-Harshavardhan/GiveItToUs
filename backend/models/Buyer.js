@@ -42,6 +42,10 @@ const BuyerSchema = new mongoose.Schema({
   dob:{
     type: Date,
     required: true
+  },
+  address:{
+    type: String,
+    required: true
   }
 
 });

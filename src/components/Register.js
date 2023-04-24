@@ -17,6 +17,52 @@ const Register = () => {
     confirmPassword: "",
   });
 
+  async function checkUsername(username) {
+    try {
+      const response = await fetch(`http://localhost:3001/api/buyers/check-username/${username}`);
+      
+      if (response.ok) {
+        const data = await response.json();
+        console.log(`Username exists: ${data.exists}`);
+        return data.exists;
+      } else {
+        console.error(`Error: ${response.status} ${response.statusText}`);
+        return false;
+      }
+    } catch (error) {
+      console.error(`Error: ${error.message}`);
+      return false;
+    }
+  }
+  
+  async function addBuyer(buyer) {
+    try {
+      const response = await fetch('http://localhost:3001/api/buyers/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(buyer),
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        console.log(`Buyer added successfully: ${JSON.stringify(data)}`);
+        return data;
+      } else {
+        const errorData = await response.json();
+        console.error(`Error: ${response.status} ${response.statusText}`, errorData);
+        return null;
+      }
+    } catch (error) {
+      console.error(`Error: ${error.message}`);
+      return null;
+    }
+  }
+  
+  
+  
+
   const [progress, setProgress] = useState(0);
   const [errors, setErrors] = useState({});
   const [usernameExists, setUsernameExists] = useState(false);
@@ -25,7 +71,6 @@ const Register = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserData((prevState) => ({ ...prevState, [name]: value }));
-    console.log(name, value);
   };
   
 
@@ -151,24 +196,26 @@ const Register = () => {
     }
   
     // Check if username already exists
-    const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
-    const userExists = existingUsers.find(
-      (user) => user.username === userData.username
-    );
-    if (userExists) {
-      setUsernameExists(true);
-      return;
-    }
+    checkUsername(userData.username).then((usernameExists) => {
+      if (usernameExists) {
+        setUsernameExists(true);
+        console.log('The username already exists.');
+        return;
+      } else {
+        console.log('The username is available.');
+      }
+    });
+    
   
     // Hash the password
     const hashedPassword = bcrypt.hashSync(userData.password, 10);
   
     // Create the new user object
     const newUser = {
-      firstName: userData.firstName,
-      lastName: userData.lastName,
-      emailAddress: userData.emailAddress,
-      phoneNumber: userData.phoneNumber,
+      firstname: userData.firstName,
+      lastname: userData.lastName,
+      email: userData.emailAddress,
+      phone: userData.phoneNumber,
       address: userData.address,
       dob: userData.dob,
       gender: userData.gender,
@@ -177,8 +224,7 @@ const Register = () => {
     };
   
     // Add the new user to the existing users list and store in local storage
-    existingUsers.push(newUser);
-    localStorage.setItem("users", JSON.stringify(existingUsers));
+    addBuyer(newUser);
     window.alert("Registration Successfull!")
     console.log(newUser);
     // Redirect to home page
