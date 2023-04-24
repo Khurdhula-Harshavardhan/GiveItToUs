@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Switch, Link } from 'react-rout
 function Reply(){
     return(<>
         <title>Settings</title>
-        <link rel="stylesheet" type="text/css" href="reply.css" />
+        <link rel="stylesheet" type="text/css" href="Reply.css" />
         <header>
           <h1>Settings</h1>
           <nav>
