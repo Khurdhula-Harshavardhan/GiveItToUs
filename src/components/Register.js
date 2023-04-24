@@ -63,7 +63,7 @@ submitBtn.addEventListener("click", function(){
   current += 1;
   setTimeout(function(){
     alert("Your Form Successfully Signed up");
-    navigate('/', {replace: true});
+    navigate('/Products', {replace: true});
   },800);
 });
 
@@ -107,7 +107,7 @@ prevBtnFifth.addEventListener("click", function(event){
 
 return(
 <>
-  
+  <div id="register">
   <div className="container">
     <header>Sign Up</header>
     <div className="progress-bar">
@@ -228,11 +228,12 @@ return(
           </div>
           <div className="field btns">
             <button className="prev-4 prev">Previous</button>
-            <button className="submit">Submit</button>
+            <button className="submit" >Submit</button>
           </div>
         </div>
       </form>
     </div>
+  </div>
   </div>
 </>
 );

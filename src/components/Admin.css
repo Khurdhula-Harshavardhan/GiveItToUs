@@ -55,9 +55,13 @@ body {
     margin-bottom: 20px;
   }
   .box-form .left .overlay span {
-    line-height: 20;
-    
+    line-height: 5;
+    float: left;
+    color: #FFFFFF;
+    text-decoration: none;
+    font:15px;
   }
+  
   .box-form .left .overlay nav p {
     margin-top: 30px;
     font-weight: 900;
@@ -77,6 +81,10 @@ body {
   .box-form .left .overlay nav a:hover {
     color: rgb(211, 182, 110);
   }
+
+  
+  
+
   .box-form .right {
     padding: 40px;
     overflow: hidden;
@@ -116,21 +124,7 @@ body {
     margin-right: 7px;
     width: auto;
   }
-  .box-form .right button {
-    float: right;
-    color: #fff;
-    font-size: 16px;
-    padding: 12px 35px;
-    border-radius: 50px;
-    
-    border: 0;
-    outline: 0;
-    box-shadow: 0px 4px 2px 0px rgba(0,0,0,.7);
-    background-image: linear-gradient(135deg, #3254a4 10%, #041bf4 100%);
-  }
-  .box-form .right button:hover {
-     background-image: linear-gradient(135deg, #a43232 10%, #f47c04 100%);;
-  }
+  
   label {
     display: block;
     position: relative;

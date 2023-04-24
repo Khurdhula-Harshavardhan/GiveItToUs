@@ -1,0 +1,16 @@
+#checkout  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: black;
+    color: #fff;
+    padding:20px;
+    z-index: 9999;
+  }
+#checkout body{
+    background-image: linear-gradient(135deg, #8aa1d5 10%, #5864cc 100%);
+  }

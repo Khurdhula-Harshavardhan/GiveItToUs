@@ -54,6 +54,13 @@ body {
     margin-top: 40px;
     margin-bottom: 20px;
   }
+  .box-form .left .overlay span {
+    line-height: 5;
+    float: left;
+    color: #FFFFFF;
+    text-decoration: none;
+    font:15px;
+  }
   .box-form .left .overlay nav p {
     margin-top: 30px;
     font-weight: 900;

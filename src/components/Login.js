@@ -1,10 +1,19 @@
 import './Login.css'
 import { BrowserRouter as Router, Routes, Route, Switch, Link } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
 
 function Login(){
+  
+  const [rememberMe, setRememberMe] = useState(false);
+  const navigate = useNavigate();
+
+  function handleRememberMeChange(event) {
+    setRememberMe(event.target.checked);
+  }
     return(
         <>
-  
+  <div id="login">
   <div className="box-form">
     <div className="left">
       <div className="overlay">
@@ -15,15 +24,15 @@ function Login(){
         </p>
         <nav>
           <ul>
-            <a href="/Gmail">
+            <Link to="/Gmail">
               <i className="sin " aria-hidden="true" /> Login with G-Mail
-            </a>
-            <a href="/admin">
-              <i className="sin " aria-hidden="true" /> Admin Login{" "}
-            </a>
-            <a href="/seller">
-              <i className="sin" aria-hidden="true" /> Seller Login{" "}
-            </a>
+            </Link>
+            <Link to="/admin">
+              <i className="sin " aria-hidden="true" /> Admin Login
+            </Link>
+            <Link to="/seller">
+              <i className="sin" aria-hidden="true" /> Seller Login
+            </Link>
           </ul>
         </nav>
       </div>
@@ -43,15 +52,21 @@ function Login(){
       <br />
       <br />
       <div className="remember-me--forget-password">
-        <label>
-          <input type="checkbox" name="item" defaultChecked="" />
+        <p>
+          <input type="checkbox"
+                name="rememberMe"
+                checked={rememberMe}
+                onChange={handleRememberMeChange} />
           <span className="text-checkbox">Remember me</span>
-        </label>
+        </p>
         <p>forget password?</p>
       </div>
       <br />
-      <button>Login</button>
+      <button  onClick={() => {
+          navigate("/Products");
+        }}>Login</button>
     </div>
+  </div>
   </div>
 </>
 

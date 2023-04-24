@@ -1,0 +1,118 @@
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+    background:#8aa1d5
+
+}
+
+header {
+	background-color: #002463;
+	color: #fff;
+	padding: 10px 20px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+header h1 {
+	margin: 0;
+}
+
+nav ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+}
+
+nav li {
+	margin-left: 20px;
+}
+
+nav li:first-child {
+	margin-left: 0;
+}
+
+nav a {
+	color: #fff;
+	text-decoration: none;
+}
+
+nav a:hover {
+	text-decoration: underline;
+}
+
+main {
+	padding: 20px;
+}
+
+footer {
+	background-color: #002463;
+	color: #fff;
+	padding: 10px 20px;
+	text-align: center;
+}
+
+/* Table styles */
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th,
+td {
+	text-align: left;
+	padding: 8px;
+}
+
+th {
+	background-color: #002463;
+	color: white;
+}
+
+tr:nth-child(even) {
+	background-color: #bdc9f5;
+}
+
+/* Order status styles */
+
+.new {
+	background-color: #ff0000;
+	color: #fff;
+	animation: blink 1s infinite;
+}
+
+.in-process {
+	background-color: #ffff00;
+	color: #000;
+}
+
+.dispatched {
+	background-color: #ffa500;
+	color: #fff;
+}
+
+.delivered {
+	background-color: #008000;
+	color: #fff;
+}
+
+.cancelled {
+	background-color: #ff0000;
+	color: #fff;
+}
+
+/* Animation for the flashing new status */
+
+@keyframes blink {
+	0% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.5;
+	}
+	100% {
+		opacity: 1;
+	}
+}
