@@ -36,7 +36,7 @@ function Login(){
         than a minute
       </p>
       <div className="inputs">
-        <input type="text" placeholder="user name" />
+        <input type="text" placeholder="Username" />
         <br />
         <input type="password" placeholder="password" />
       </div>
@@ -47,10 +47,15 @@ function Login(){
           <input type="checkbox" name="item" defaultChecked="" />
           <span className="text-checkbox">Remember me</span>
         </label>
-        <p>forget password?</p>
+        <p>forgot password?</p>
       </div>
       <br />
       <button>Login</button>
+      <p>
+        checker
+        <Link to="/products"> Create Your Account</Link> it takes less
+        than a minute
+      </p>
     </div>
   </div>
 </>

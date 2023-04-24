@@ -1,240 +1,359 @@
-import "./Register.css"
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react"
+import bcrypt from "bcryptjs";
+import "./Register.css";
 
-function Register(){
-
-const navigate = useNavigate();
-
-useEffect(() => {
-const slidePage = document.querySelector(".slide-page");
-const nextBtnFirst = document.querySelector(".firstNext");
-const prevBtnSec = document.querySelector(".prev-1");
-const nextBtnSec = document.querySelector(".next-1");
-const prevBtnThird = document.querySelector(".prev-2");
-const nextBtnThird = document.querySelector(".next-2");
-const prevBtnFourth = document.querySelector(".prev-3");
-const nextBtnFourth = document.querySelector(".next-3");
-const prevBtnFifth = document.querySelector(".prev-4");
-const submitBtn = document.querySelector(".submit");
-const progressText = document.querySelectorAll(".step p");
-const progressCheck = document.querySelectorAll(".step .check");
-const bullet = document.querySelectorAll(".step .bullet");
-let current = 1;
-
-nextBtnFirst.addEventListener("click", function(event){
-  event.preventDefault();
-  slidePage.style.marginLeft = "-25%";
-  bullet[current - 1].classList.add("active");
-  progressCheck[current - 1].classList.add("active");
-  progressText[current - 1].classList.add("active");
-  current += 1;
-});
-nextBtnSec.addEventListener("click", function(event){
-  event.preventDefault();
-  slidePage.style.marginLeft = "-50%";
-  bullet[current - 1].classList.add("active");
-  progressCheck[current - 1].classList.add("active");
-  progressText[current - 1].classList.add("active");
-  current += 1;
-});
-
-nextBtnThird.addEventListener("click", function(event){
-  event.preventDefault();
-  slidePage.style.marginLeft = "-75%";
-  bullet[current - 1].classList.add("active");
-  progressCheck[current - 1].classList.add("active");
-  progressText[current - 1].classList.add("active");
-  current += 1;
-});
-nextBtnFourth.addEventListener("click", function(event){
-    event.preventDefault();
-    slidePage.style.marginLeft = "-100%";
-    bullet[current - 1].classList.add("active");
-    progressCheck[current - 1].classList.add("active");
-    progressText[current - 1].classList.add("active");
-    current += 1;
+const Register = () => {
+  const [userData, setUserData] = useState({
+    firstName: "",
+    lastName: "",
+    emailAddress: "",
+    phoneNumber: "",
+    address: "",
+    dob: "",
+    gender: "",
+    username: "",
+    password: "",
+    confirmPassword: "",
   });
 
-submitBtn.addEventListener("click", function(){
-  bullet[current - 1].classList.add("active");
-  progressCheck[current - 1].classList.add("active");
-  progressText[current - 1].classList.add("active");
-  current += 1;
-  setTimeout(function(){
-    alert("Your Form Successfully Signed up");
-    navigate('/', {replace: true});
-  },800);
-});
-
-prevBtnSec.addEventListener("click", function(event){
-  event.preventDefault();
-  slidePage.style.marginLeft = "0%";
-  bullet[current - 2].classList.remove("active");
-  progressCheck[current - 2].classList.remove("active");
-  progressText[current - 2].classList.remove("active");
-  current -= 1;
-});
-
-prevBtnThird.addEventListener("click", function(event){
-  event.preventDefault();
-  slidePage.style.marginLeft = "-25%";
-  bullet[current - 2].classList.remove("active");
-  progressCheck[current - 2].classList.remove("active");
-  progressText[current - 2].classList.remove("active");
-  current -= 1;
-});
-
-prevBtnFourth.addEventListener("click", function(event){
-  event.preventDefault();
-  slidePage.style.marginLeft = "-50%";
-  bullet[current - 2].classList.remove("active");
-  progressCheck[current - 2].classList.remove("active");
-  progressText[current - 2].classList.remove("active");
-  current -= 1;
-});
-
-prevBtnFifth.addEventListener("click", function(event){
-    event.preventDefault();
-    slidePage.style.marginLeft = "-75%";
-    bullet[current - 2].classList.remove("active");
-    progressCheck[current - 2].classList.remove("active");
-    progressText[current - 2].classList.remove("active");
-    current -= 1;
-  });
-});
-
-
-return(
-<>
+  async function checkUsername(username) {
+    try {
+      const response = await fetch(`http://localhost:3001/api/buyers/check-username/${username}`);
+      
+      if (response.ok) {
+        const data = await response.json();
+        console.log(`Username exists: ${data.exists}`);
+        return data.exists;
+      } else {
+        console.error(`Error: ${response.status} ${response.statusText}`);
+        return false;
+      }
+    } catch (error) {
+      console.error(`Error: ${error.message}`);
+      return false;
+    }
+  }
   
-  <div className="container">
-    <header>Sign Up</header>
-    <div className="progress-bar">
-      <div className="step">
-        <p>Name</p>
-        <div className="bullet">
-          <span>1</span>
-        </div>
-        <div className="check fas fa-check" />
-      </div>
-      <div className="step">
-        <p>Contact</p>
-        <div className="bullet">
-          <span>2</span>
-        </div>
-        <div className="check fas fa-check" />
-      </div>
-      <div className="step">
-        <p>Address</p>
-        <div className="bullet">
-          <span>3</span>
-        </div>
-        <div className="check fas fa-check" />
-      </div>
-      <div className="step">
-        <p>Birth</p>
-        <div className="bullet">
-          <span>4</span>
-        </div>
-        <div className="check fas fa-check" />
-      </div>
-      <div className="step">
-        <p>Submit</p>
-        <div className="bullet">
-          <span>5</span>
-        </div>
-        <div className="check fas fa-check" />
-      </div>
-    </div>
-    <div className="form-outer">
-      <form action="#">
-        <div className="page slide-page">
-          <div className="title">Basic Info:</div>
-          <div className="field">
-            <div className="label">First Name</div>
-            <input id="firstName" type="text" required/>
-          </div>
-          <div className="field">
-            <div className="label">Last Name</div>
-            <input id="lastName" type="text" required/>
-          </div>
-          <div className="field">
-            <button className="firstNext next">Next</button>
-          </div>
-        </div>
-        <div className="page">
-          <div className="title">Contact Info:</div>
-          <div className="field">
-            <div className="label">Email Address</div>
-            <input id="emailAddress" type="email" required/>
-          </div>
-          <div className="field">
-            <div className="label">Phone Number</div>
-            <input id="phoneNumber" type="Number" required/>
-          </div>
-          <div className="field btns">
-            <button className="prev-1 prev">Previous</button>
-            <button className="next-1 next">Next</button>
-          </div>
-        </div>
-        <div className="page">
-          <div className="title">Address</div>
-          <div className="field">
-            <div className="label">Line 1</div>
-            <input id="addLineOne" type="text" required/>
-          </div>
-          <div className="field">
-            <div className="label">Line 2</div>
-            <input type="text" />
-          </div>
-          <div className="field btns">
-            <button className="prev-2 prev">Previous</button>
-            <button className="next-2 next">Next</button>
-          </div>
-        </div>
-        <div className="page">
-          <div className="title">Date of Birth:</div>
-          <div className="field">
-            <div className="label">Date</div>
-            <input id="dob" type="date" required/>
-          </div>
-          <div className="field">
-            <div className="label">Gender</div>
-            <select id="gender" required>
-              <option>Male</option>
-              <option>Female</option>
-              <option>Other</option>
-            </select>
-          </div>
-          <div className="field btns">
-            <button className="prev-3 prev">Previous</button>
-            <button className="next-3 next">Next</button>
-          </div>
-        </div>
-        <div className="page">
-          <div className="title">Login Details:</div>
-          <div className="field">
-            <div className="label">Username</div>
-            <input id="username" type="text" required/>
-          </div>
-          <div className="field">
-            <div className="label">Password</div>
-            <input id="password" type="password" required/>
-          </div>
-          <div className="field">
-            <div className="label">Confirm Password</div>
-            <input id="confirmPassword" type="password" required/>
-          </div>
-          <div className="field btns">
-            <button className="prev-4 prev">Previous</button>
-            <button className="submit">Submit</button>
-          </div>
-        </div>
-      </form>
-    </div>
+  async function addBuyer(buyer) {
+    try {
+      const response = await fetch('http://localhost:3001/api/buyers/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(buyer),
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        console.log(`Buyer added successfully: ${JSON.stringify(data)}`);
+        return data;
+      } else {
+        const errorData = await response.json();
+        console.error(`Error: ${response.status} ${response.statusText}`, errorData);
+        return null;
+      }
+    } catch (error) {
+      console.error(`Error: ${error.message}`);
+      return null;
+    }
+  }
+  
+  
+  
+
+  const [progress, setProgress] = useState(0);
+  const [errors, setErrors] = useState({});
+  const [usernameExists, setUsernameExists] = useState(false);
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUserData((prevState) => ({ ...prevState, [name]: value }));
+  };
+  
+
+
+
+  const validateUserData = (userData) => {
+    let errors = {};
+  
+    if (!userData.firstName.trim()) {
+      errors.firstName = "First name is required";
+    }
+  
+    if (!userData.lastName.trim()) {
+      errors.lastName = "Last name is required";
+    }
+  
+    if (!userData.emailAddress.trim()) {
+      errors.emailAddress = "Email address is required";
+    } else if (!/\S+@\S+\.\S+/.test(userData.emailAddress)) {
+      errors.emailAddress = "Invalid email address";
+    }
+  
+    if (!userData.phoneNumber.trim()) {
+      errors.phoneNumber = "Phone number is required";
+    } else if (!/^\d{10}$/.test(userData.phoneNumber)) {
+      errors.phoneNumber = "Invalid phone number";
+    }
+  
+    if (!userData.address.trim()) {
+      errors.address = "Address is required";
+    }
+  
+    if (!userData.dob) {
+      errors.dob = "Date of birth is required";
+    }
+  
+    if (!userData.gender) {
+      errors.gender = "Gender is required";
+    }
+  
+    if (!userData.username.trim()) {
+      errors.username = "Username is required";
+    }
+  
+    if (!userData.password.trim()) {
+      errors.password = "Password is required";
+    } else if (userData.password.length < 8) {
+      errors.password = "Password must be at least 8 characters";
+    }
+
+    console.log("About to validate the confirm passsword");
+    if (!userData.confirmPassword.trim()) {
+      errors.confirmPassword = "Confirm password is needed!";
+    } else if (userData.confirmPassword.length < 8) {
+      errors.confirmPassword = "Password must be at least 8 characters";
+    }
+    else if(userData.password != userData.confirmPassword){
+      errors.confirmPassword ="Passwords do not match!";
+      console.log("passwords do not match");
+    }
+    console.log("validation completee");
+  
+    return errors;
+  };
+
+  useEffect(() => {
+    const updatedProgress = Object.keys(errors).reduce(
+      (acc, key) => (errors[key] ? acc : acc + 10),
+      0
+    );
+    setProgress(updatedProgress);
+  }, [errors]);
+
+  useEffect(() => {
+
+    
+    
+
+    const validate = (key, value) => {
+      switch (key) {
+        case "firstName":
+        case "lastName":
+          return value.length >= 1 ? "" : "This field is required.";
+        case "emailAddress":
+          const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+          return emailRegex.test(value) ? "" : "Invalid email address.";
+        case "phoneNumber":
+          const phoneRegex = /^\d{10}$/;
+          return phoneRegex.test(value) ? "" : "Invalid phone number.";
+        case "address":
+          return value.length >= 5 ? "" : "Address is too short.";
+        case "dob":
+          const age = new Date().getFullYear() - new Date(value).getFullYear();
+          return age >= 13 ? "" : "You must be at least 13 years old.";
+        case "gender":
+          return value ? "" : "Please select your gender.";
+        case "username":
+          setUsernameExists(false);
+          return value.length >= 3 ? "" : "Username must be at least 3 characters.";
+        case "password":
+          return value.length >= 8 ? "" : "Password must be at least 8 characters.";
+        case "confirmPassword":
+          return value.length >= 8 ? "" : "Password must be at least 8 characters.";
+        default:
+          return "";
+      }
+    };
+
+    const newErrors = { ...errors };
+    Object.entries(userData).forEach(([key, value]) => {
+      newErrors[key] = validate(key, value);
+    });
+    setErrors(newErrors);
+  }, [userData]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const errors = validateUserData(userData);
+  
+    if (Object.keys(errors).length > 0) {
+      setErrors(errors);
+      return;
+    }
+  
+    // Check if username already exists
+    checkUsername(userData.username).then((usernameExists) => {
+      if (usernameExists) {
+        setUsernameExists(true);
+        console.log('The username already exists.');
+        return;
+      } else {
+        console.log('The username is available.');
+      }
+    });
+    
+  
+    // Hash the password
+    const hashedPassword = bcrypt.hashSync(userData.password, 10);
+  
+    // Create the new user object
+    const newUser = {
+      firstname: userData.firstName,
+      lastname: userData.lastName,
+      email: userData.emailAddress,
+      phone: userData.phoneNumber,
+      address: userData.address,
+      dob: userData.dob,
+      gender: userData.gender,
+      username: userData.username,
+      password: hashedPassword,
+    };
+  
+    // Add the new user to the existing users list and store in local storage
+    addBuyer(newUser);
+    window.alert("Registration Successfull!")
+    console.log(newUser);
+    // Redirect to home page
+    navigate("/");
+  };
+  
+
+  return (
+    
+    <div className="register-container">
+  <h2>Register</h2>
+
+  <div className="progress-container">
+    <div className="progress-bar" style={{ width: `${progress}%` }}></div>
   </div>
-</>
-);
-}
+
+  <form className="register-form" onSubmit={handleSubmit}>
+    <div className="form-group">
+      <label htmlFor="firstName">First Name*</label>
+      <input
+        type="text"
+        name="firstName"
+        value={userData.firstName}
+        onChange={handleChange}
+      />
+      {errors.firstName && <span className="error">{errors.firstName}</span>}
+    </div>
+
+    <div className="form-group">
+      <label htmlFor="lastName">Last Name*</label>
+      <input
+        type="text"
+        name="lastName"
+        value={userData.lastName}
+        onChange={handleChange}
+      />
+      {errors.lastName && <span className="error">{errors.lastName}</span>}
+    </div>
+
+    <div className="form-group">
+      <label htmlFor="emailAddress">Email Address*</label>
+      <input
+        type="email"
+        name="emailAddress"
+        value={userData.emailAddress}
+        onChange={handleChange}
+      />
+      {errors.emailAddress && <span className="error">{errors.emailAddress}</span>}
+    </div>
+
+    <div className="form-group">
+      <label htmlFor="phoneNumber">Phone Number*</label>
+      <input
+        type="tel"
+        name="phoneNumber"
+        value={userData.phoneNumber}
+        onChange={handleChange}
+      />
+      {errors.phoneNumber && <span className="error">{errors.phoneNumber}</span>}
+    </div>
+
+    <div className="form-group">
+      <label htmlFor="address">Address*</label>
+      <textarea
+        name="address"
+        value={userData.address}
+        onChange={handleChange}
+      ></textarea>
+      {errors.address && <span className="error">{errors.address}</span>}
+    </div>
+
+    <div className="form-group">
+      <label htmlFor="dob">Date of Birth*</label>
+      <input type="date" name="dob" value={userData.dob} onChange={handleChange} />
+      {errors.dob && <span className="error">{errors.dob}</span>}
+    </div>
+
+    <div className="form-group">
+      <label htmlFor="gender">Gender*</label>
+      <select name="gender" value={userData.gender} onChange={handleChange}>
+        <option value=""></option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+      </select>
+      {errors.gender && <span className="error">{errors.gender}</span>}
+    </div>
+
+    <div className="form-group">
+      <label htmlFor="username">Username*</label>
+      <input
+        type="text"
+        name="username"
+        value={userData.username}
+        onChange={handleChange}
+      />
+      {errors.username && <span className="error">{errors.username}</span>}
+      {usernameExists && <span className="error">Username already exists.</span>}
+    </div>
+
+    <div className="form-group">
+      <label htmlFor="password">Password*</label>
+      <input
+        type="password"
+        name="password"
+        value={userData.password}
+        onChange={handleChange}
+      />
+      {errors.password && <span className="error">{errors.password}</span>}
+    </div>
+
+    <div className="form-group">
+      <label htmlFor="confirmPassword">Confirm Password*</label>
+      <input
+        type="password"
+        name="confirmPassword"
+        value={userData.confirmPassword}
+        onChange={handleChange}
+        />
+        {errors.confirmPassword && <span className="error">{errors.confirmPassword}</span>}
+    </div>
+
+    <button type="submit">Register</button>
+  </form>
+</div>
+
+  );
+};
+
 export default Register;
+
+
