@@ -6,7 +6,7 @@ function Dashboard(){
 
     return(<>
         <title>Dashboard</title>
-        <link rel="stylesheet" type="text/css" href="dashboard.css" />
+        <link rel="stylesheet" type="text/css" href="Dashboard.css" />
         <header>
           <h1>Dashboard</h1>
           <nav>
