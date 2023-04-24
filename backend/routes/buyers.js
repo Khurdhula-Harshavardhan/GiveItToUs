@@ -14,6 +14,7 @@ const express = require('express');
 const router = express.Router();
 const Buyer = require('../models/Buyer');
 
+//insert the new buyer information into the database.
 router.post('/register', async (req, res) => {
   try {
     const { firstname, lastname, email, phone, address, dob, gender, username, password } = req.body;
@@ -28,6 +29,20 @@ router.post('/register', async (req, res) => {
   }
 });
 
-// Add other routes as needed
+//Check if the username is already present within our collection.
+router.get('/check-username/:username', async (req, res) => {
+    try {
+      const { username } = req.params;
+      const buyer = await Buyer.findOne({ username });
+  
+      if (buyer) {
+        res.status(200).json({ exists: true });
+      } else {
+        res.status(200).json({ exists: false });
+      }
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  });
 
 module.exports = router;

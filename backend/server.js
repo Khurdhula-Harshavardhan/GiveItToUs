@@ -10,14 +10,12 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
-  ssl: true,
-  sslCA: [require('fs').readFileSync('X509-cert-6415171768107886158.pem')], // Replace with the path to your downloaded CA certificate
-});
+credentials = "./X509-cert-6415171768107886158.pem"
 
+mongoose.connect(process.env.MONGODB_URI, {
+    sslKey: credentials,
+    sslCert: credentials,
+  });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 db.once('open', () => {
