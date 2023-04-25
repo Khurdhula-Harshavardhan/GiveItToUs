@@ -51,6 +51,34 @@ function Products() {
     );
     setDisplayedProducts(filteredProducts);
   };
+
+  const handleAddToCart = async (productid) => {
+    console.log(user.username, productid);
+    try {
+      const response = await fetch("http://localhost:3001/api/cart/addToCart", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: user.username, // replace with actual username
+          productId: productid,
+        }),
+      });
+  
+      if (response.ok) {
+        // Handle success
+        window.alert("This product has been added to your cart successfully!");
+        console.log("Product added to cart!");
+      } else {
+        // Handle error
+        window.alert("Failed to add this product to your cart, sorry!");
+        console.error("Failed to add product to cart");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
   
 
   const handleLogout = () =>{
@@ -60,6 +88,10 @@ function Products() {
 
   const hangleSellProduct = () =>{
     navigate("/sellproducts");
+  }
+
+  const handleCart = () => {
+    navigate("/cart");
   }
 
   return (
@@ -88,7 +120,7 @@ function Products() {
               </ul>
             </li>
             <li>
-              <a href="cart.html">Cart</a>
+              <a onClick={() => handleCart()}>Cart</a>
             </li>
           </ul>
         </nav>
@@ -174,7 +206,7 @@ function Products() {
     <small><p>Seller: {product.seller}</p>
     <p>Condition: {product.condition}</p></small>
     <p>$ {product.price}</p>
-    <button>Add to cart</button>
+    <button onClick={() => handleAddToCart(product._id)}>Add to Cart</button>
   </div>
 ))}
 </section>
