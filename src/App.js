@@ -7,7 +7,7 @@ function App() {
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user'));
-    if (user && user.session) {
+    if (user && user.session && user != null) {
       setLoggedIn(true);
     } else {
       setLoggedIn(false);
