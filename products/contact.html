@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="contact.css">
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+            <li><a href="product.html">Products</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li class="account">
+              <a href="#">My Account</a>
+              <ul class="account-dropdown">
+                <li><a href="ordhis.html">Order History</a></li>
+                <li><a href="seller_page.html">Sell Product</a></li>
+                <li><a href="#">Logout</a></li>
+              </ul>
+            </li>
+            <li><a href="cart.html">Cart</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <h1>Contact Us</h1>
+      <form>
+        <div>
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+          <label for="query-type">Query Type:</label>
+          <select id="query-type" name="query-type" required>
+            <option value="">-- Select Query Type --</option>
+            <option value="General Inquiry">General Inquiry</option>
+            <option value="Product Inquiry">Product Inquiry</option>
+            <option value="Support Request">Support Request</option>
+          </select>
+        </div>
+        <div>
+          <label for="details">Details:</label>
+          <textarea id="details" name="details" required></textarea>
+        </div>
+        <div>
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+    </main>
+  </body>
+</html>
