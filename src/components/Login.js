@@ -123,9 +123,7 @@ function Login(){
             <a href="/admin">
               <i className="sin " aria-hidden="true" /> Admin Login{" "}
             </a>
-            <a href="/seller">
-              <i className="sin" aria-hidden="true" /> Seller Login{" "}
-            </a>
+          
           </ul>
         </nav>
       </div>
@@ -163,11 +161,7 @@ function Login(){
       <br />
       <button type='submit'>Login</button>
       </form>
-      <p>
-        checker
-        <Link to="/products"> Create Your Account</Link> it takes less
-        than a minute
-      </p>
+  
     </div>
   </div>
 </>
