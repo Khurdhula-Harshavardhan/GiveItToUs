@@ -15,7 +15,7 @@ function Admin(){
           Welcome to GiveItToUs. Your portal to give away to the poor or give us
           something to sell for you. Login or Signup to Begin
         </p>
-        <a>return back to home page </a>
+        <a href='/'>return back to home page </a>
           
       </div>
     </div>

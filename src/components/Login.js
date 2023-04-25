@@ -161,11 +161,7 @@ function Login(){
       <br />
       <button type='submit'>Login</button>
       </form>
-      <p>
-        checker
-        <Link to="/products"> Create Your Account</Link> it takes less
-        than a minute
-      </p>
+  
     </div>
   </div>
 </>
