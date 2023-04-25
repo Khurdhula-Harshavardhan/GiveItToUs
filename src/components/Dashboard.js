@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Switch, Link } from 'react-rout
 function Dashboard(){
 
 
-    return(<>
+    return(<div id="dashboard">
         <title>Dashboard</title>
         <link rel="stylesheet" type="text/css" href="Dashboard.css" />
         <header>
@@ -12,6 +12,9 @@ function Dashboard(){
           <nav>
             <ul>
             <li>
+              <Link to="/Admin_page">Home</Link>
+              </li>
+              <li>
               <Link to="/Dashboard">Dashboard</Link>
               </li>
               <li>
@@ -65,7 +68,7 @@ function Dashboard(){
         <footer>
           <p>GiveItToUs E-commerce Website.</p>
         </footer>
-      </>
+      </div>
       );
 }
 

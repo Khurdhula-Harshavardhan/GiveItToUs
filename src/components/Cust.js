@@ -2,7 +2,7 @@ import './Cust.css'
 import { BrowserRouter as Router, Routes, Route, Switch, Link } from 'react-router-dom';
 
 function Cust(){
-    return(<>
+    return(<div id="cust">
         <title>Customers</title>
         <link rel="stylesheet" type="text/css" href="Cust.css" />
         <header>
@@ -10,6 +10,9 @@ function Cust(){
           <nav>
             <ul>
             <li>
+              <Link to="/Admin_page">Home</Link>
+            </li>
+             <li>
               <Link to="/Dashboard">Dashboard</Link>
               </li>
               <li>
@@ -75,7 +78,7 @@ function Cust(){
         <footer>
           <p>GiveItToUs E-commerce Website.</p>
         </footer>
-      </>
+      </div>
       );
 }
 

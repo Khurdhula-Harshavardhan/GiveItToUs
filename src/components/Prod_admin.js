@@ -2,13 +2,16 @@ import './Prod_admin.css'
 import { BrowserRouter as Router, Routes, Route, Switch, Link } from 'react-router-dom';
 
 function Prod_admin(){
-    return(<>
+    return(<div id="prod_admin">
         <title>Products</title>
         <link rel="stylesheet" type="text/css" href="Prod_admin.css" />
         <header>
           <h1>Products</h1>
           <nav>
             <ul>
+              <li>
+              <Link to="/Admin_page">Home</Link>
+              </li>
               <li>
               <Link to="/Dashboard"> Dashboard</Link>
               </li>
@@ -65,7 +68,7 @@ function Prod_admin(){
         <footer>
           <p>GiveItToUs E-commerce Website.</p>
         </footer>
-      </>
+      </div>
       );
 }
 

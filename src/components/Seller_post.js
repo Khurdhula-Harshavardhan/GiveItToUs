@@ -10,6 +10,8 @@ function Seller_post() {
   const [condition, setCondition] = useState('');
   const [category, setCategory] = useState('');
   const [error, setError] = useState('');
+ 
+  
 
   function handleisCheckedChange(event) {
     setisChecked(event.target.checked);
@@ -23,9 +25,10 @@ function Seller_post() {
     'https://www.allstate.com/resources/Allstate/images/allstate-benefits/icons/uploadicon.png?v=13d72a4f-3f0a-4d4e-2c6f-5b1ccd06c986.jpg',
     'https://www.allstate.com/resources/Allstate/images/allstate-benefits/icons/uploadicon.png?v=13d72a4f-3f0a-4d4e-2c6f-5b1ccd06c986.jpg',
   ];
-
+  const [images, setImages] = useState(defaultImages);
   const handleFileInputChange = (event) => {
     const files = event.target.files;
+    
     if (files.length > 6) {
       alert('Only up to 6 files can be uploaded!');
       return;
@@ -46,6 +49,7 @@ function Seller_post() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    
 
     if (!title || !price || !description ||!category ||!condition) {
       setError('Please fill in all required fields.');
@@ -56,9 +60,10 @@ function Seller_post() {
       setError('Please check the box to submit.');
       return;
     }
+    
 
    
-
+    setImages(defaultImages);
     setTitle('');
     setPrice('');
     setDescription('');
@@ -70,7 +75,7 @@ function Seller_post() {
   };
     
 
-return(
+return(<div id="post">
   <form onSubmit={handleSubmit}>
   <div className="container">
   
@@ -78,10 +83,10 @@ return(
       <h1>POST HERE</h1>
     </div>
     <div className="product-details">
-      <h2>Product Details</h2>
+      <h3>Product Details</h3>
         <div className="field1">
           <p>Title:</p>
-          <input  type="text" id="title" value={title} name="title" required onChange={(e) => setTitle(e.target.value)}/>
+          <input  type="text" id="title" value={title} name="title"  onChange={(e) => setTitle(e.target.value)} required/>
         </div>
         <div className="field2">
           <p >Description:</p>
@@ -90,7 +95,7 @@ return(
       
       <div className="category">
       <form>
-        <h2>Select Category: </h2>
+        <h3>Select Category: </h3>
         <select id="category" value={category} onChange={(e) => setCategory(e.target.value)} required>
           <option value="">select a category</option>
           <option value="Footwear">Footwear</option>
@@ -101,7 +106,7 @@ return(
           <option value="Furniture">Furniture</option>
         </select>
       
-      <h2>Product Condition:</h2>
+      <h3>Product Condition:</h3>
       <select id="condition" value={condition} onChange={(e) => setCondition(e.target.value)} required>
           <option value="">select the Condition</option>
           <option value="New">New</option>
@@ -118,12 +123,12 @@ return(
       </form>
     </div>
     <div className="price">
-      <h2>Set Price</h2>
+      <h3>Set Price</h3>
       <span>$</span>
       <input type="value" id="price" name="price" value={price} onChange={(e) => setPrice(e.target.value)} required />
     </div>
     <div className="images">
-      <h2>Upload Images</h2>
+      <h3>Upload Images</h3>
       <form >
         <input type="file" id="file-upload" accept="image/*" multiple onChange={handleFileInputChange} required/>
         <div>
@@ -147,6 +152,7 @@ return(
  
   </div>
   </form>
+  </div>
 );
 }
 

@@ -1,4 +1,4 @@
-body {
+#cust body {
 	margin: 0;
 	padding: 0;
 	font-family: Arial, sans-serif;
@@ -6,86 +6,99 @@ body {
 
 }
 
-header {
-	background-color: #002463;
+#cust header {
+	position: fixed;
+	top:0;
+	right:0;
+	left:0;
+	background-color: black;
 	color: #fff;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 10px 20px;
+	padding:  20px;
 }
 
-nav ul {
-	display: flex;
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
+#cust nav ul {
+	position: fixed;
+    list-style: none;
+    right: 20px;
+    top:30px;
+    padding: 0;
+    display: flex;
 }
 
-nav ul li {
+#cust nav ul li {
 	margin-right: 20px;
 }
 
-nav ul li a {
+#cust nav ul li a {
 	color: #fff;
 	text-decoration: none;
 }
 
-nav ul li a:hover {
+#cust  nav ul li a:hover {
 	color: #ccc;
 }
 
-main {
+#cust  main {
 	margin: 20px;
 }
 
-h1, h2 {
+#cust h1, h2 {
 	margin-top: 0;
 }
 
-footer {
+#cust footer {
+	position:fixed;
+	bottom:0;
+	left:0;
+	right:0;
 	background-color: #002463;
 	color: #fff;
 	padding: 10px 20px;
 	text-align: center;
 }
 
-.customer-table-container {
-    max-width: 800px;
-    margin: auto;
-    padding: 20px;
+#cust .customer-table-container {
+	position:fixed;
+    right:100px;
+    top: 150px;
+    border-collapse: collapse;
+    width: 100%;
+    left: 0;
 }
 
-table {
+#cust table {
 	border-collapse: collapse;
 	width: 100%;
 }
 
-th,
+#cust th,
 td {
 	text-align: left;
 	padding: 8px;
 }
 
-th {
+#cust th {
 	background-color: #002463;
 	color: white;
 }
 
-tr:nth-child(even) {
+#cust tr:nth-child(even) {
 	background-color: #bdc9f5;
 }
 
-ul {
+#cust ul {
 	list-style: none;
 	margin: 0;
 	padding: 0;
 }
 
-li {
+#cust li {
 	margin-bottom: 10px;
 }
 
-.customer-table-container td ul li:before {
+#cust .customer-table-container td ul li:before {
 	content: "- ";
 }

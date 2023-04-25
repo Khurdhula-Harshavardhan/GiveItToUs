@@ -1,109 +1,129 @@
-body {
+#orders body {
 	font-family: Arial, sans-serif;
 	margin: 0;
     background:#8aa1d5
 
 }
 
-header {
-	background-color: #002463;
+#orders header {
+	position: fixed;
+	top:0;
+	left:0;
+	right:0;
+	background-color: black;
 	color: #fff;
-	padding: 10px 20px;
 	display: flex;
-	align-items: center;
 	justify-content: space-between;
+	padding:  20px;
+	
 }
 
-header h1 {
-	margin: 0;
+
+
+#orders nav ul {
+	position: fixed;
+    list-style: none;
+    right: 20px;
+    top:30px;
+    padding: 0;
+    display: flex;
 }
 
-nav ul {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	display: flex;
-}
-
-nav li {
+#orders nav li {
 	margin-left: 20px;
 }
 
-nav li:first-child {
+#orders nav li:first-child {
 	margin-left: 0;
 }
 
-nav a {
+#orders nav a {
 	color: #fff;
 	text-decoration: none;
 }
 
-nav a:hover {
+#orders nav a:hover {
 	text-decoration: underline;
 }
 
-main {
-	padding: 20px;
+#orders main h5{
+	position: fixed;
+	top:100px;
+	font-size: 25px;
+	
+	
 }
 
-footer {
+#orders footer {
+	position: fixed;
+	left:0;
+	bottom: 0;
+	right:0;
 	background-color: #002463;
 	color: #fff;
 	padding: 10px 20px;
 	text-align: center;
+	
 }
 
-/* Table styles */
 
-table {
-	border-collapse: collapse;
-	width: 100%;
+
+#orders table {
+	
+	position:fixed;
+    right:100px;
+    top: 150px;
+    border-collapse: collapse;
+    width: 100%;
+    left: 0;
+	
+	
 }
 
-th,
+#orders th,
 td {
 	text-align: left;
 	padding: 8px;
 }
 
-th {
+#orders th {
 	background-color: #002463;
 	color: white;
 }
 
-tr:nth-child(even) {
+#orders tr:nth-child(even) {
 	background-color: #bdc9f5;
 }
 
-/* Order status styles */
 
-.new {
+
+#orders .new {
 	background-color: #ff0000;
 	color: #fff;
 	animation: blink 1s infinite;
 }
 
-.in-process {
+#orders .in-process {
 	background-color: #ffff00;
 	color: #000;
 }
 
-.dispatched {
+#orders .dispatched {
 	background-color: #ffa500;
 	color: #fff;
 }
 
-.delivered {
+#orders .delivered {
 	background-color: #008000;
 	color: #fff;
 }
 
-.cancelled {
+#orders .cancelled {
 	background-color: #ff0000;
 	color: #fff;
 }
 
-/* Animation for the flashing new status */
+
 
 @keyframes blink {
 	0% {

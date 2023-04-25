@@ -1,4 +1,4 @@
-body {
+#dashboard body {
 	margin: 0;
 	padding: 0;
 	font-family: Arial, sans-serif;
@@ -6,67 +6,82 @@ body {
 
 }
 
-header {
-	background-color: #002463;
+#dashboard header {
+	position: fixed;
+	top:0;
+	left:0;
+	right:0;
+	background-color: black;
 	color: #fff;
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
-	padding: 10px 20px;
+	padding:  20px;
 }
-header nav ul {
+#dashboard header nav ul {
+    position: fixed;
     list-style: none;
-    margin: 0;
+    right: 20px;
+    top:30px;
     padding: 0;
     display: flex;
+
     }
     
-    header nav li {
-    margin: 0 10px;
-    }
+#dashboard header nav li {
+    margin-left: 20px;
     
-    header nav li a {
+}
+    
+    
+#dashboard header nav li a {
     color: #fff;
     text-decoration: none;
     }
     
-    main {
-    padding: 20px;
+
+    
+#dashboard   h2 {
+    position: fixed;
+    top: 100px;
+    left:700px;
     }
     
-    h2 {
-    margin-bottom: 20px;
-    }
-    
-    canvas {
+#dashboard     canvas {
     max-width: 800px;
     margin-bottom: 20px;
     }
     
-    table {
+#dashboard     table {
+    position:fixed;
+    right:100px;
+    top: 150px;
     border-collapse: collapse;
     width: 100%;
+    left: 0;
+   
+    
     }
     
-    th, td {
+#dashboard    th, td {
     padding: 10px;
     text-align: left;
     }
     
-    th {
+#dashboard    th {
     background-color: #333;
     color: #fff;
     }
     
-    tr:nth-child(even) {
+#dashboard     tr:nth-child(even) {
     background-color: #bdc9f5;
     }
-    
-    tr:hover {
+#dashboard    tr:hover {
     background-color: #ddd;
     }
     
-    footer {
+#dashboard     footer {
+    position: fixed;
+	left:0;
     background-color: #002463;
     color: #fff;
     text-align: center;

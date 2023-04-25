@@ -2,14 +2,16 @@ import './Reply.css'
 import { BrowserRouter as Router, Routes, Route, Switch, Link } from 'react-router-dom';
 
 function Reply(){
-    return(<>
-        <title>Settings</title>
-        <link rel="stylesheet" type="text/css" href="Reply.css" />
+    return(<div id="reply">
+        
         <header>
           <h1>Settings</h1>
           <nav>
             <ul>
             <li>
+              <Link to="/Admin_page">Home</Link>
+              </li>
+              <li>
               <Link to="/Dashboard">Dashboard</Link>
               </li>
               <li>
@@ -31,7 +33,7 @@ function Reply(){
           <div className="response-page-container">
             <h2>Customer Query Response</h2>
             <div className="form-container">
-              <label htmlFor="customer-select">Select a Customer:</label>
+              <span htmlFor="customer-select">Select a Customer:</span>
               <select id="customer-select">
                 <option value="">--Select a Customer--</option>
                 <option value="John Doe">John Doe</option>
@@ -39,9 +41,9 @@ function Reply(){
                 <option value="Bob Johnson">Bob Johnson</option>
                 {/* Add more options for additional customers */}
               </select>
-              <label htmlFor="subject-input">Subject:</label>
+              <span htmlFor="subject-input">Subject:</span>
               <input type="text" id="subject-input" />
-              <label htmlFor="message-input">Message:</label>
+              <span htmlFor="message-input">Message:</span>
               <textarea id="message-input" defaultValue={""} />
               <button id="send-button">Send Response</button>
             </div>
@@ -50,7 +52,7 @@ function Reply(){
         <footer>
           <p>GiveItToUs E-commerce Website.</p>
         </footer>
-      </>
+      </div>
       );
 
 

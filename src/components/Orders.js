@@ -2,13 +2,16 @@ import './Orders.css'
 import { BrowserRouter as Router, Routes, Route, Switch, Link } from 'react-router-dom';
 
 function Orders(){
-    return(<>
+    return(<div id="orders">
         <title>Orders Page</title>
         <link rel="stylesheet" type="text/css" href="Orders.css" />
         <header>
           <h1>Orders</h1>
           <nav>
             <ul>
+            <li>
+              <Link to="/Admin_page">Home</Link>
+              </li>
             <li>
               <Link to="/Dashboard">Dashboard</Link>
               </li>
@@ -28,7 +31,7 @@ function Orders(){
           </nav>
         </header>
         <main>
-          <h2>All Orders</h2>
+          <h5>All Orders</h5>
           <table>
             <thead>
               <tr>
@@ -75,7 +78,7 @@ function Orders(){
         <footer>
           <p>GiveItToUs E-commerce Website.</p>
         </footer>
-      </>
+      </div>
       );
 }
 

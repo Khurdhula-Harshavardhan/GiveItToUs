@@ -6,89 +6,108 @@ body {
 
 }
 
-header {
-	background-color: #002463;
+#reply header {
+	position: fixed;
+	top:0;
+	left:0;
+	right:0;
+	background-color: black;
 	color: #fff;
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
-	padding: 10px 20px;
+
+	padding:  20px;
 }
 
-nav ul {
-	display: flex;
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
+#reply nav ul {
+	position: fixed;
+    list-style: none;
+    right: 20px;
+    top:30px;
+    padding: 0;
+    display: flex;
 }
 
-nav ul li {
+#reply nav ul li {
+	
 	margin-right: 20px;
 }
 
-nav ul li a {
+#reply nav ul li a {
 	color: #fff;
 	text-decoration: none;
 }
 
-nav ul li a:hover {
+#reply nav ul li a:hover {
 	color: #ccc;
 }
 
-main {
+#reply main {
 	margin: 20px;
 }
 
-h1, h2 {
-	margin-top: 0;
+#reply h2 {
+	position: fixed;
+	text-align: center;
+	top:120px;
 }
 
-footer {
+#reply footer {
+	position:fixed;
+	right:0;
+	left:0;
+	bottom:0;
 	background-color: #002463;
     color: #fff;
 	padding: 10px 20px;
 	text-align: center;
 }
 
-.response-page-container {
-	max-width: 800px;
-	margin: auto;
-	padding: 20px;
+#reply .response-page-container {
+	max-width: 400px;
+	
+	
 }
 
-.form-container {
+#reply .form-container {
 	border: 1px solid #ccc;
-	padding: 20px;
-	background-color: #f2f2f2;
+	padding: 10px;
+	
+	height: 400px;
+	width: 300px;
 }
 
-label {
+#reply span {
 	display: block;
-	margin-bottom: 5px;
+	margin-top: 25px;
+	font-weight: bold;
+	font-size: large;
 }
 
-input[type="text"],
+#reply input[type="text"],
 textarea {
 	display: block;
-	width: 100%;
+	width: 90%;
 	padding: 8px;
 	border: 1px solid #ccc;
 	border-radius: 4px;
-	margin-bottom: 10px;
+	margin-bottom: 30px;
+	margin-top: 10px;
 	resize: vertical;
 }
 
-select {
+#reply select {
 	display: block;
-	width: 100%;
+	width: 95%;
 	padding: 8px;
 	border: 1px solid #ccc;
 	border-radius: 4px;
-	margin-bottom: 10px;
+	margin-top: 10px;
+	margin-bottom: 30px;
 	background-color: #fff;
 }
 
-button {
+#reply button {
 	background-color: #002463;
 	color: white;
 	padding: 10px;
@@ -97,6 +116,6 @@ button {
 	cursor: pointer;
 }
 
-button:hover {
+#reply button:hover {
 	background-color: #8aa1d5;
 }

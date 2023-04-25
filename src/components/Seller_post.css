@@ -27,15 +27,15 @@ body{
     padding: 40px 0px 60px;
     
 }
-.container h2{
+.container h3{
     font-size: 20px;
     padding:20px 0px 17px;}
 
-.container p{
+#post.container p{
     font-size: 16px;}
 
 
-.container .price,.contact{
+.container .price {
     border-top: 1px solid rgb(97, 97, 174);
     padding: 12px 0px 50px;
 }
