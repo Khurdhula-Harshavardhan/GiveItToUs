@@ -12,6 +12,7 @@ import Gmail from './components/Gmail';
 import Seller from './components/Seller';
 import ProductsPage from './components/ProductsPage';
 import SellProducts from './components/SellProducts';
+import Cart from './components/Cart';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -25,6 +26,7 @@ root.render(
       <Route path="/seller" element={<Seller />} />
       <Route path="/products" element={<ProductsPage />} />
       <Route path="/sellproducts" element={<SellProducts />} />
+      <Route path="/cart" element={<Cart />} />
     </Routes>
   </Router>
 );
