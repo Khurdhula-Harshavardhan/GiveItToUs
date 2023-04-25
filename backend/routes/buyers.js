@@ -45,4 +45,38 @@ router.get('/check-username/:username', async (req, res) => {
     }
   });
 
+
+router.get('/verify/:username', async (req, res) => {
+    try {
+      const { username } = req.params;
+      const buyer = await Buyer.findOne({ username });
+  
+      if (buyer) {
+        res.status(200).json({ hashedPassword: buyer.password });
+      } else {
+        res.status(200).json({ hashedPassword: null });
+      }
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+//get the usercredentials for authentication:
+router.post('/login', async (req, res) => {
+    const { username } = req.body;
+  
+    // Find the buyer with the given username
+    const buyer = await Buyer.findOne({ username });
+    
+    // If no buyer found, return 404 Not Found
+    if (!buyer) {
+        console.log("No such user exists!");
+      return res.status(404).json({ error: 'Buyer not found' });
+      
+    }
+    const hashedPassword = buyer.password;
+    // Return the password if buyer is found
+    res.json({ password: hashedPassword });
+  });
+
 module.exports = router;

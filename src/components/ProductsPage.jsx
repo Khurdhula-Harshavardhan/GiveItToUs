@@ -1,8 +1,29 @@
 import React from 'react';
 import { Navbar, Nav, Form, FormControl, Button, Container, Row, Col, Card } from 'react-bootstrap';
 import './ProductsPage.css';
+import { Link } from 'react-router-dom';
+import Cookies from 'js-cookie';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const ProductsPage = () => {
+
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) {
+      navigate('/login');
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    
+    navigate("/");
+  }
+  
+
   const products = [
     { id: 1, title: 'Product 1', price: 29.99, image: 'https://via.placeholder.com/150' },
     { id: 2, title: 'Product 2', price: 49.99, image: 'https://via.placeholder.com/150' },
@@ -55,6 +76,7 @@ const ProductsPage = () => {
           ))}
         </Row>
       </Container>
+      <Button onClick={handleLogout}>logout</Button>
     </>
   );
 };
