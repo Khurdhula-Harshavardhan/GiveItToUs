@@ -2,12 +2,17 @@ import './Seller_post.css'
 import { useState } from 'react';
 import axios from 'axios';
 function Seller_post() {
-  const [rememberMe, setRememberMe] = useState(false);
+  const [isChecked, setisChecked] = useState(false);
   const [previewImages, setPreviewImages] = useState([]);
- 
+  const [title, setTitle] = useState('');
+  const [price, setPrice] = useState('');
+  const [description, setDescription] = useState('');
+  const [condition, setCondition] = useState('');
+  const [category, setCategory] = useState('');
+  const [error, setError] = useState('');
 
-  function handleRememberMeChange(event) {
-    setRememberMe(event.target.checked);
+  function handleisCheckedChange(event) {
+    setisChecked(event.target.checked);
   }
   
   const defaultImages = [
@@ -25,6 +30,7 @@ function Seller_post() {
       alert('Only up to 6 files can be uploaded!');
       return;
     }
+    
     const newPreviewImages = [];
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
@@ -35,138 +41,113 @@ function Seller_post() {
       };
       reader.readAsDataURL(file);
     }
+    
   };
 
-  const [emessage,setemessage] = useState("");
-  function handleSubmit(event) {
+  const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Get values from input fields
-    const title = document.getElementById('title').value;
-    const description = document.getElementById('description').value;
-    const price = document.getElementById('price').value;
+    if (!title || !price || !description ||!category ||!condition) {
+      setError('Please fill in all required fields.');
+      return;
+    }
+   
+    if (!isChecked) {
+      setError('Please check the box to submit.');
+      return;
+    }
+
+   
+
+    setTitle('');
+    setPrice('');
+    setDescription('');
+    setCategory('');
+    setCondition('');
+    setisChecked(false);
+    setError('');
+  
+  };
     
 
-    // Check if any required fields are empty
-    if(title===""||description===""||price===""){
-      setemessage('All fields are required');
-    } else{
-      
-              const data = {
-                  "title":title,
-                  "description":description,
-              };
-              
-
-axios.put('http://localhost:3000/Seller_post', data)
-.then(response => {
-  
-  window.location.href = '/login';
-  setemessage(response.data.message);
-})
-
-}
-}
-
-  
-  
-  
-    return(
-        
-  
+return(
+  <form onSubmit={handleSubmit}>
   <div className="container">
+  
     <div className="post">
       <h1>POST HERE</h1>
     </div>
     <div className="product-details">
       <h2>Product Details</h2>
-      
         <div className="field1">
           <p>Title:</p>
-          <input  type="text"
-              id="title"
-              name="title"
-              placeholder=""
-              />
+          <input  type="text" id="title" value={title} name="title" required onChange={(e) => setTitle(e.target.value)}/>
         </div>
         <div className="field2">
           <p >Description:</p>
-          <input type="text"
-              id="description"
-              name="description"
-              placeholder=""
-              />
+          <input type="text" id="description" name="description" value={description} onChange={(e) => setDescription(e.target.value)} required/>
         </div>
       
       <div className="category">
-        <h2>Select Category: </h2>
-        <select>
-          <option>select a category</option>
-          <option>Footwear</option>
-          <option>Accesories</option>
-          <option>Clothes</option>
-        </select>
-      </div>
-    
       <form>
-        
-        <input type="radio" id="sell" />
+        <h2>Select Category: </h2>
+        <select id="category" value={category} onChange={(e) => setCategory(e.target.value)} required>
+          <option value="">select a category</option>
+          <option value="Footwear">Footwear</option>
+          <option value="Clothes">Clothes</option>
+          <option value="Accessories">Accessories</option>
+          <option value="Books">Books</option>
+          <option value="Electronics">Electronics</option>
+          <option value="Furniture">Furniture</option>
+        </select>
+      
+      <h2>Product Condition:</h2>
+      <select id="condition" value={condition} onChange={(e) => setCondition(e.target.value)} required>
+          <option value="">select the Condition</option>
+          <option value="New">New</option>
+          <option value="Old">Old</option>
+          <option value="Used fair">Used fair</option>
+      </select>
+      </form>
+      </div>
+      <form>
+        <input type="radio" id="sell" name="sellOrgiveaway" required/>
         <span>Sell</span>
-        <input type="radio" id="give_away"/>
+        <input type="radio" id="give_away" name="sellOrgiveaway" required/>
         <span>Give away</span>
       </form>
     </div>
     <div className="price">
       <h2>Set Price</h2>
       <span>$</span>
-      <input type="value" id="price" name="price"  placeholder=" " />
+      <input type="value" id="price" name="price" value={price} onChange={(e) => setPrice(e.target.value)} required />
     </div>
     <div className="images">
       <h2>Upload Images</h2>
       <form >
-      
-        <input
-          type="file"
-          id="file-upload"
-          accept="image/*"
-          multiple
-          onChange={handleFileInputChange}
-        />
+        <input type="file" id="file-upload" accept="image/*" multiple onChange={handleFileInputChange} required/>
         <div>
         {[...defaultImages.slice(0, 6 - previewImages.length), ...previewImages].map((previewImage, index) => (
-          <img
-            key={index}
-            src={previewImage}
-            alt={`Preview image ${index}`}
-            style={{ width: '100px', height: '100px', objectFit: 'cover' }}
-          />
-        ))}
+        <img key={index} src={previewImage} alt={`Preview image ${index}`} style={{ width: '100px', height: '100px', objectFit: 'cover' }}/>))}
         </div>
-      </form>
+       </form>
     </div>
-    <div className="contact">
-      <h2>Contact Details</h2>
-      <p>Address line 1:</p>
-      <input type="text" placeholder=" " />
-      <p>Address line 2:</p>
-      <input type="text" placeholder=" " />
-    </div>
-    <p className="tc">
+    
+    <div className="tc">
+      <span className="middle">
       Accept <a href='/tc'>terms and conditions</a>
-      <input type="checkbox"
-                name="rememberMe"
-                checked={rememberMe}
-                onChange={handleRememberMeChange} />
+      </span>
+      <input type="checkbox" name="isChecked" checked={isChecked} onChange={handleisCheckedChange} />
       <span className="checkmark" />
-    </p>
-    <div className="submit">
-      <button onClick={handleSubmit}>Submit</button>
+      {error && <div style={{ color: 'red' , textAlign: 'center'}}>{error}</div>}
     </div>
+    <div className="submit">
+      <button>Submit</button>
+    </div>
+ 
   </div>
-
-
-
-    );
+  </form>
+);
 }
 
 export default Seller_post; 

@@ -39,7 +39,7 @@
     overflow: hidden;
     background-size: 650px;;
   }
-  .box-form .left .overlay {
+  #login .box-form .left .overlay {
     padding: 30px;
     width: 100%;
     height: 100%;
@@ -47,18 +47,18 @@
     overflow: hidden;
     box-sizing: border-box;
   }
-  .box-form .left .overlay h1 {
+  #login.box-form .left .overlay h1 {
     font-size: 10vmax;
     line-height: 1;
     font-weight: 900;
     margin-top: 40px;
     margin-bottom: 20px;
   }
-  .box-form .left .overlay nav p {
+  #login.box-form .left .overlay nav p {
     margin-top: 30px;
     font-weight: 900;
   }
-  .box-form .left .overlay nav a {
+  #login .box-form .left .overlay nav a {
     text-align: center;
     background: #000308;
     color: #FFFFFF;
@@ -70,10 +70,10 @@
     text-decoration: none;
     font:15px;
   }
-  .box-form .left .overlay nav a:hover {
+  #login .box-form .left .overlay nav a:hover {
     color: rgb(211, 182, 110);
   }
-  .box-form .right {
+  #login .box-form .right {
     padding: 40px;
     overflow: hidden;
   }

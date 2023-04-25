@@ -4,13 +4,13 @@ import { BrowserRouter as Router, Routes, Route, Switch, Link } from 'react-rout
 function Prod_admin(){
     return(<>
         <title>Products</title>
-        <link rel="stylesheet" type="text/css" href="Prod_admin.css />
+        <link rel="stylesheet" type="text/css" href="Prod_admin.css" />
         <header>
           <h1>Products</h1>
           <nav>
             <ul>
-            <li>
-              <Link to="/Dashboard">Dashboard</Link>
+              <li>
+              <Link to="/Dashboard"> Dashboard</Link>
               </li>
               <li>
               <Link to="/Prod_admin">Products</Link>
