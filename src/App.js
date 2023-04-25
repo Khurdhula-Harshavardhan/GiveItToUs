@@ -1,23 +1,23 @@
-import { BrowserRouter as Router, Routes, Route, Switch, Link } from 'react-router-dom';
-import Gmail from './components/Gmail';
-import Login from "./components/Login";
-import Register from "./components/Register";
-import Seller from "./components/Seller";
-import Admin from "./components/Admin";
+import React, { useState, useEffect } from 'react';
+import Login from './components/Login';
 import ProductsPage from './components/ProductsPage';
 
 function App() {
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user && user.session) {
+      setLoggedIn(true);
+    } else {
+      setLoggedIn(false);
+    }
+  }, []);
+
   return (
-    <Router>
-    <Routes>
-          <Route path="/" element={<Login/>} />
-          <Route path="/admin" element={<Admin/>} />
-          <Route path="/register" element={<Register/>} />
-          <Route path="/gmail" element={<Gmail/>} />
-          <Route path="/seller" element={<Seller/>} />
-          <Route path="/products" element={<ProductsPage/>} />
-    </Routes>
-  </Router>
+    <>
+      {loggedIn ? <ProductsPage /> : <Login />}
+    </>
   );
 }
 
