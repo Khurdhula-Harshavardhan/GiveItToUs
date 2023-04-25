@@ -12,9 +12,14 @@ function SellProducts() {
   const [category, setCategory] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const [sellOrGiveAway, setSellOrGiveAway] = useState('');
 
   function handleisCheckedChange(event) {
     setisChecked(event.target.checked);
+  }
+
+  const handleSellOrGiveAwayChange = (event) => {
+    setSellOrGiveAway(event.target.value);
   }
 
   const user = JSON.parse(localStorage.getItem("user"));
@@ -22,6 +27,7 @@ function SellProducts() {
     window.alert("Please close this window and login again!");
     return navigate("/login");
   }
+  
   
   const defaultImages = [
     'https://www.allstate.com/resources/Allstate/images/allstate-benefits/icons/uploadicon.png?v=13d72a4f-3f0a-4d4e-2c6f-5b1ccd06c986.jpg',
@@ -32,27 +38,39 @@ function SellProducts() {
     'https://www.allstate.com/resources/Allstate/images/allstate-benefits/icons/uploadicon.png?v=13d72a4f-3f0a-4d4e-2c6f-5b1ccd06c986.jpg',
   ];
 
-  const handleFileInputChange = (event) => {
+  const handleFileInputChange = async (event) => {
     const files = event.target.files;
     if (files.length > 6) {
       alert('Only up to 6 files can be uploaded!');
       return;
     }
-    
+  
     const newPreviewImages = [];
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
       const reader = new FileReader();
-      reader.onload = () => {
-        newPreviewImages.push(reader.result);
-        setPreviewImages([...previewImages, ...newPreviewImages]);
-      };
+  
+      // Create a Promise that resolves when the image is loaded
+      const loadPromise = new Promise((resolve) => {
+        reader.onload = () => {
+          console.log(`Processing image ${i} completed`);
+          resolve(reader.result);
+        };
+      });
+  
       reader.readAsDataURL(file);
+      const result = await loadPromise; // Wait for the Promise to resolve
+      newPreviewImages.push(result);
     }
-    
-  };
+  
+    setPreviewImages(prevImages => [...prevImages, ...newPreviewImages]);
 
-  const handleSubmit = (event) => {
+    console.log('previewImages:', previewImages);
+  };
+  
+  
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (!title || !price || !description ||!category ||!condition) {
@@ -65,6 +83,37 @@ function SellProducts() {
       return;
     }
 
+    // Prepare the form data
+  const formData = new FormData();
+  formData.append("name", title);
+  formData.append("seller", user.username);
+  formData.append("price", price);
+  formData.append("description", description);
+  formData.append("category", category);
+  formData.append("condition", condition);
+  formData.append("images", previewImages);
+  formData.append("available", true);
+  formData.append("choice", sellOrGiveAway);
+  console.log("Form Data:", formData);
+  try {
+    // Send the POST request to the server
+    const response = await fetch("http://localhost:3001/api/products/sell", {
+      method: "POST",
+      body: formData,
+    });
+    
+
+    if (response.ok) {
+      // Redirect the user to the products page
+      navigate("/products");
+    } else {
+      // Display an error message if the request fails
+      setError("Failed to submit the form. Please try again later.");
+    }
+  } catch (error) {
+    console.error(error);
+    setError("An unexpected error occurred. Please try again later.");
+  }
    
 
     setTitle('');
@@ -74,7 +123,7 @@ function SellProducts() {
     setCondition('');
     setisChecked(false);
     setError('');
-  
+    setPreviewImages([]);
   };
   
   const handleLogout = () =>{
@@ -118,6 +167,7 @@ return(
       </ul>
     </nav>
   </header>
+  <center>
   <form onSubmit={handleSubmit}>
   <div className="container">
   
@@ -136,7 +186,7 @@ return(
         </div>
       
       <div className="category">
-      <form>
+      
         <h2>Select Category: </h2>
         <select id="category" value={category} onChange={(e) => setCategory(e.target.value)} required>
           <option value="">select a category</option>
@@ -155,14 +205,17 @@ return(
           <option value="Old">Old</option>
           <option value="Used fair">Used fair</option>
       </select>
-      </form>
+      
       </div>
-      <form>
-        <input type="radio" id="sell" name="sellOrgiveaway" required/>
-        <span>Sell</span>
-        <input type="radio" id="give_away" name="sellOrgiveaway" required/>
-        <span>Give away</span>
-      </form>
+      
+      <div className="sell-or-giveaway">
+      <input type="radio" id="sell" name="sellOrgiveaway" value="sell" checked={sellOrGiveAway === 'sell'} onChange={handleSellOrGiveAwayChange} required />
+      <label>Sell</label>
+
+      <input type="radio" id="giveaway" name="sellOrgiveaway" value="giveaway" checked={sellOrGiveAway === 'giveaway'} onChange={handleSellOrGiveAwayChange} required />
+      <label>Give away</label>
+    </div>
+      
     </div>
     <div className="price">
       <h2>Set Price</h2>
@@ -171,13 +224,14 @@ return(
     </div>
     <div className="images">
       <h2>Upload Images</h2>
-      <form >
+      
         <input type="file" id="file-upload" accept="image/*" multiple onChange={handleFileInputChange} required/>
         <div>
-        {[...defaultImages.slice(0, 6 - previewImages.length), ...previewImages].map((previewImage, index) => (
-        <img key={index} src={previewImage} alt={`Preview image ${index}`} style={{ width: '100px', height: '100px', objectFit: 'cover' }}/>))}
+        {previewImages.map((previewImage, index) => (
+  <img key={index} src={previewImage} alt={`Preview image ${index}`} style={{ width: '100px', height: '100px' }}/>
+))}
         </div>
-       </form>
+       
     </div>
     
     <div className="tc">
@@ -194,6 +248,7 @@ return(
  
   </div>
   </form>
+  </center>
   </>
 );
 }

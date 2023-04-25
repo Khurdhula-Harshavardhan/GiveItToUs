@@ -1,14 +1,7 @@
 html, body {
     overflow-y: auto;
 }
-body{
-    background: -webkit-linear-gradient(bottom, #051bf4, #8aa1d5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: "Open Sans", sans-serif;
-    
-}
+
 .container{
     margin:60px;
     background-color: white;

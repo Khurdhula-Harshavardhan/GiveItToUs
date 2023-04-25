@@ -18,6 +18,7 @@ function Products() {
       .then((response) => response.json())
       .then((data) => {
         setProducts(data);
+        console.log(data);
         setCategories(Array.from(new Set(data.map((p) => p.category))));
         setPriceRange({
           min: Math.min(...data.map((p) => p.price)),
@@ -158,15 +159,20 @@ function Products() {
       </div>
     </div>
     <section className="products">
-      {products.map((product) => (
-        <div className="product" key={product.id}>
-          <img src={product.image} alt={product.name} />
-          <h3>{product.name}</h3>
-          <p>${product.price}</p>
-          <button>Add to cart</button>
-        </div>
-      ))}
-    </section>
+    {products.map((product) => (
+  <div className="product" key={product.id}>
+    {product.images.length > 0 && (
+      <img
+        src={URL.createObjectURL(new Blob([product.images[0]]))}
+        alt={product.name}
+      />
+    )}
+    <h3>{product.name}</h3>
+    <p>${product.price}</p>
+    <button>Add to cart</button>
+  </div>
+))}
+</section>
   </main>
 
   <footer>
