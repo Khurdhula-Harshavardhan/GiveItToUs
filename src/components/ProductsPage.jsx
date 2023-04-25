@@ -54,6 +54,10 @@ function Products() {
     navigate("/login");
   }
 
+  const hangleSellProduct = () =>{
+    navigate("/sellproducts");
+  }
+
   return (
     <>
       <header>
@@ -72,7 +76,7 @@ function Products() {
                   <a href="ordhis.html">Order History</a>
                 </li>
                 <li>
-                  <a href="seller_page.html">Sell Product</a>
+                  <a onClick={() => hangleSellProduct()}>Sell Product</a>
                 </li>
                 <li>
                   <a href="#" onClick={() => handleLogout()}>Logout</a>
