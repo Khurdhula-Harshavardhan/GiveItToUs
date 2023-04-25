@@ -7,6 +7,7 @@ function Products() {
   const [categories, setCategories] = useState([]);
   const [priceRange, setPriceRange] = useState({ min: "", max: "" });
   const navigate = useNavigate();
+  const [displayedProducts, setDisplayedProducts] = useState([]);
 
   
   useEffect(() => {
@@ -18,7 +19,8 @@ function Products() {
       .then((response) => response.json())
       .then((data) => {
         setProducts(data);
-        console.log(data);
+        setDisplayedProducts(data);
+        
         setCategories(Array.from(new Set(data.map((p) => p.category))));
         setPriceRange({
           min: Math.min(...data.map((p) => p.price)),
@@ -40,15 +42,16 @@ function Products() {
       category === "all"
         ? products
         : products.filter((p) => p.category === category);
-    setProducts(filteredProducts);
+    setDisplayedProducts(filteredProducts);
   };
-
+  
   const handlePriceRangeChange = (minPrice, maxPrice) => {
     const filteredProducts = products.filter(
       (p) => p.price >= minPrice && p.price <= maxPrice
     );
-    setProducts(filteredProducts);
+    setDisplayedProducts(filteredProducts);
   };
+  
 
   const handleLogout = () =>{
     localStorage.setItem('user', null);
@@ -159,16 +162,18 @@ function Products() {
       </div>
     </div>
     <section className="products">
-    {products.map((product) => (
+    {displayedProducts.map((product) => (
   <div className="product" key={product.id}>
     {product.images.length > 0 && (
       <img
-        src={URL.createObjectURL(new Blob([product.images[0]]))}
-        alt={product.name}
-      />
+      src={`http://localhost:3001/uploads/${product.images[0]}`}
+      alt={product.name}
+    />
     )}
-    <h3>{product.name}</h3>
-    <p>${product.price}</p>
+    <center><h3>{product.name}</h3></center>
+    <small><p>Seller: {product.seller}</p>
+    <p>Condition: {product.condition}</p></small>
+    <p>$ {product.price}</p>
     <button>Add to cart</button>
   </div>
 ))}

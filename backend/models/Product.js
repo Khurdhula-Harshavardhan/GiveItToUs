@@ -19,7 +19,7 @@ const productSchema = new mongoose.Schema({
   },
   condition: {
     type: String,
-    enum: ['New', 'Used', 'Used fair'],
+    enum: ['New', 'Old', 'Used fair'],
     required: true
   },
   choice: {
@@ -35,15 +35,10 @@ const productSchema = new mongoose.Schema({
     type: Boolean,
     required: true
   },
-  images: [
-    {
-      filename: { type: String, required: true },
-      originalname: { type: String, required: true },
-      contentType: { type: String, required: true },
-      size: { type: Number, required: true },
-      data: { type: Buffer, required: true }
-    }
-  ]
+  images: [{
+    type: String,
+    required: true
+  }]
 });
 
 module.exports = mongoose.model('Product', productSchema);

@@ -6,15 +6,16 @@ const path = require('path');
 
 const Product = require('../models/Product');
 
-// Set up the storage location for uploaded images
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads/');
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname);
-  }
-});
+    destination: function (req, file, cb) {
+      cb(null, path.join(__dirname, '..', 'uploads'));
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname);
+    }
+  });
+  
+  
 
 // Define the file type that can be uploaded
 const fileFilter = (req, file, cb) => {
@@ -53,6 +54,7 @@ router.post('/sell', upload.array('images', 6), async (req, res) => {
     console.log("New product posted successfully!");
   } catch (err) {
     // Delete any uploaded images if an error occurs
+    console.log("Error occured deleting images.");
     req.files.forEach(file => {
       const filePath = path.join(__dirname, '..', 'uploads', file.filename);
       fs.unlink(filePath, (err) => {

@@ -24,6 +24,7 @@ db.once('open', () => {
 
 app.use('/api/buyers', buyersRouter);
 app.use('/api/products', productsRouter);
+app.use('/uploads', express.static('uploads'));
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {

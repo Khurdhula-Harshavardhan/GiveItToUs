@@ -1,5 +1,5 @@
 import './SellProducts.css'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function SellProducts() {
@@ -13,7 +13,14 @@ function SellProducts() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const [sellOrGiveAway, setSellOrGiveAway] = useState('');
+  const [uploadedFiles, setUploadedFiles] = useState([]);
 
+
+  useEffect(() => {
+    console.log("previewImages length:", previewImages.length);
+    console.log("previewImages content:", previewImages);
+    console.log("Files: ",uploadedFiles)
+  }, [previewImages, uploadedFiles]);
   function handleisCheckedChange(event) {
     setisChecked(event.target.checked);
   }
@@ -46,8 +53,10 @@ function SellProducts() {
     }
   
     const newPreviewImages = [];
+    const newUploadedFiles = [];
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
+      newUploadedFiles.push(file);
       const reader = new FileReader();
   
       // Create a Promise that resolves when the image is loaded
@@ -61,18 +70,24 @@ function SellProducts() {
       reader.readAsDataURL(file);
       const result = await loadPromise; // Wait for the Promise to resolve
       newPreviewImages.push(result);
+      
     }
   
+    
     setPreviewImages(prevImages => [...prevImages, ...newPreviewImages]);
-
-    console.log('previewImages:', previewImages);
+  setUploadedFiles(prevFiles => [...prevFiles, ...newUploadedFiles]); // Update the uploadedFiles state
   };
+  
+  
+  
   
   
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    previewImages.forEach((image, index) => {
+        console.log(image, index)
+      });
     if (!title || !price || !description ||!category ||!condition) {
       setError('Please fill in all required fields.');
       return;
@@ -91,7 +106,10 @@ function SellProducts() {
   formData.append("description", description);
   formData.append("category", category);
   formData.append("condition", condition);
-  formData.append("images", previewImages);
+  uploadedFiles.forEach((file, index) => {
+    formData.append('images', file, file.name); // Make sure to use 'images' as the field name
+});
+   // Append each image individually
   formData.append("available", true);
   formData.append("choice", sellOrGiveAway);
   console.log("Form Data:", formData);
@@ -223,16 +241,16 @@ return(
       <input type="value" id="price" name="price" value={price} onChange={(e) => setPrice(e.target.value)} required />
     </div>
     <div className="images">
-      <h2>Upload Images</h2>
-      
-        <input type="file" id="file-upload" accept="image/*" multiple onChange={handleFileInputChange} required/>
-        <div>
-        {previewImages.map((previewImage, index) => (
-  <img key={index} src={previewImage} alt={`Preview image ${index}`} style={{ width: '100px', height: '100px' }}/>
-))}
-        </div>
-       
-    </div>
+  <h2>Upload Images</h2>
+
+  <input type="file" id="file-upload" accept="image/*" multiple onChange={handleFileInputChange} required/>
+  <div>
+    {previewImages.map((previewImage, index) => (
+      <img key={index} src={previewImage} alt={`Preview image ${index}`} style={{ width: '100px', height: '100px' }}/>
+    ))}
+  </div>
+</div>
+
     
     <div className="tc">
       <span className="middle">
