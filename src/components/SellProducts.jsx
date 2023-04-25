@@ -180,7 +180,7 @@ return(
           </ul>
         </li>
         <li>
-          <a href="cart.html">Cart</a>
+          <a href="/cart">Cart</a>
         </li>
       </ul>
     </nav>

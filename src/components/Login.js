@@ -123,9 +123,7 @@ function Login(){
             <a href="/admin">
               <i className="sin " aria-hidden="true" /> Admin Login{" "}
             </a>
-            <a href="/seller">
-              <i className="sin" aria-hidden="true" /> Seller Login{" "}
-            </a>
+          
           </ul>
         </nav>
       </div>

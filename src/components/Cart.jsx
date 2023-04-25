@@ -92,7 +92,7 @@ const Cart = () => {
               <a href="#">My Account</a>
               <ul className="account-dropdown">
                 <li>
-                  <a href="ordhis.html">Order History</a>
+                  <a href="#">Order History</a>
                 </li>
                 <li>
                   <a onClick={() => hangleSellProduct()}>Sell Product</a>
