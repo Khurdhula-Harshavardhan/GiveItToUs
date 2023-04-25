@@ -1,5 +1,3 @@
-/* Global styles */
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -63,9 +61,9 @@ nav .account:hover .account-dropdown {
   vertical-align: top;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  text-align: center; /* Add text-align to center the text within the card */
   font-family: 'Times New Roman', Times, serif; /* Set the font family to Times New Roman */
   font-weight: bold; /* Set the font weight to bold */
+  display: inline-block; /* Add display inline-block to display it horizontally */
 }
 
 
@@ -74,15 +72,17 @@ nav .account:hover .account-dropdown {
   margin-bottom: 10px;
 }
 
+
 .filter-section {
-  margin-bottom: 20px;
+  /* Removed margin-bottom to decrease space between filter sections */
 }
 
-.category-filters label,
-.price-range label {
-  display: block;
-  margin-bottom: 10px;
+.category-filters label {
+  list-style: none; /* Remove bullets */
+  display: flow-root; /* Prevent wrapping and remove any potential extra margin */
+  margin-right: 10px;
 }
+
 
 .category-filters input,
 .price-range input {
@@ -102,15 +102,18 @@ nav .account:hover .account-dropdown {
   display: flex;
   flex-wrap: wrap;
   margin: 10px;
+  flex-direction: row; /* Set the direction to row */
 }
 
 .product {
   width: calc(25% - 20px);
+  height: calc(25% - 20px); /* Set the height to match the width */
   margin: 10px;
   background-color: #fff;
   border: 1px solid #ccc;
   padding: 20px;
 }
+
 
 .product h3 {
   font-size: 16px;

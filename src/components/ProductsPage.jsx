@@ -7,6 +7,7 @@ function Products() {
   const [categories, setCategories] = useState([]);
   const [priceRange, setPriceRange] = useState({ min: "", max: "" });
   const navigate = useNavigate();
+  const [displayedProducts, setDisplayedProducts] = useState([]);
 
   
   useEffect(() => {
@@ -18,6 +19,8 @@ function Products() {
       .then((response) => response.json())
       .then((data) => {
         setProducts(data);
+        setDisplayedProducts(data);
+        
         setCategories(Array.from(new Set(data.map((p) => p.category))));
         setPriceRange({
           min: Math.min(...data.map((p) => p.price)),
@@ -39,19 +42,24 @@ function Products() {
       category === "all"
         ? products
         : products.filter((p) => p.category === category);
-    setProducts(filteredProducts);
+    setDisplayedProducts(filteredProducts);
   };
-
+  
   const handlePriceRangeChange = (minPrice, maxPrice) => {
     const filteredProducts = products.filter(
       (p) => p.price >= minPrice && p.price <= maxPrice
     );
-    setProducts(filteredProducts);
+    setDisplayedProducts(filteredProducts);
   };
+  
 
   const handleLogout = () =>{
     localStorage.setItem('user', null);
     navigate("/login");
+  }
+
+  const hangleSellProduct = () =>{
+    navigate("/sellproducts");
   }
 
   return (
@@ -72,7 +80,7 @@ function Products() {
                   <a href="ordhis.html">Order History</a>
                 </li>
                 <li>
-                  <a href="seller_page.html">Sell Product</a>
+                  <a onClick={() => hangleSellProduct()}>Sell Product</a>
                 </li>
                 <li>
                   <a href="#" onClick={() => handleLogout()}>Logout</a>
@@ -154,15 +162,22 @@ function Products() {
       </div>
     </div>
     <section className="products">
-      {products.map((product) => (
-        <div className="product" key={product.id}>
-          <img src={product.image} alt={product.name} />
-          <h3>{product.name}</h3>
-          <p>${product.price}</p>
-          <button>Add to cart</button>
-        </div>
-      ))}
-    </section>
+    {displayedProducts.map((product) => (
+  <div className="product" key={product.id}>
+    {product.images.length > 0 && (
+      <img
+      src={`http://localhost:3001/uploads/${product.images[0]}`}
+      alt={product.name}
+    />
+    )}
+    <center><h3>{product.name}</h3></center>
+    <small><p>Seller: {product.seller}</p>
+    <p>Condition: {product.condition}</p></small>
+    <p>$ {product.price}</p>
+    <button>Add to cart</button>
+  </div>
+))}
+</section>
   </main>
 
   <footer>

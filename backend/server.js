@@ -5,7 +5,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 
 const buyersRouter = require('./routes/buyers');
-
+const productsRouter = require('./routes/products')
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -23,6 +23,8 @@ db.once('open', () => {
 });
 
 app.use('/api/buyers', buyersRouter);
+app.use('/api/products', productsRouter);
+app.use('/uploads', express.static('uploads'));
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {

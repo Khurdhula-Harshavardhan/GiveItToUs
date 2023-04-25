@@ -23,7 +23,7 @@ const Register = () => {
       
       if (response.ok) {
         const data = await response.json();
-        console.log(`Username exists: ${data.exists}`);
+        
         return data.exists;
       } else {
         console.error(`Error: ${response.status} ${response.statusText}`);

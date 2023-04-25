@@ -1,0 +1,173 @@
+html, body {
+    overflow-y: auto;
+}
+
+.container{
+    margin:60px;
+    background-color: white;
+    width: 650px;
+    text-align: left;
+    border-radius: 5px;
+    height:auto;
+    align-items: stretch;
+    box-shadow: 0 0 20px 6px #090b6f85;
+    padding: 10px 50px 50px 50px; 
+}
+
+.container .post h1{
+    font-size: 25px;
+    text-align: center;
+    padding: 40px 0px 60px;
+    
+}
+.container h2{
+    font-size: 20px;
+    padding:20px 0px 17px;}
+
+.container p{
+    font-size: 16px;}
+
+
+.container .price,.contact{
+    border-top: 1px solid rgb(97, 97, 174);
+    padding: 12px 0px 50px;
+}
+
+
+.container .images img{
+    padding: 50px;
+    
+}
+
+.container .price span, input{
+   padding: 5px;
+}
+.container .price span{
+    color: rgb(123, 118, 118);
+}
+.container .product-details{
+    padding: 0px 0px 40px;
+}
+
+
+.container .product-details .category select{
+    font-size: 17px;
+    padding:5px 6px 5px;
+   
+}
+.container .product-details  form{
+    padding:25px 2px 1px;
+}
+.container .product-details  form span{
+    padding:0px 50px 13px 5px;
+}
+.container .product-details .field1 input[type=text]{
+    width: 100%;
+    padding: 20px 20px 50px;
+    font-size: 18px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    height: 1px;
+}
+.container .product-details .field2 input[type=text]{
+    width: 100%;
+    padding: 22px 20px 137px;
+    font-size: 18px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    height: 150px;
+    
+}
+
+
+.container .images{
+    border-top: 1px solid rgb(97, 97, 174);
+    padding: 17px 0px 30px;
+}
+
+
+
+.container .contact input[type=text]{
+    width: 100%;
+    padding: 16px 20px 50px;
+    margin: 8px 0;
+    font-size: 15px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    height: 5px;
+}
+.container .submit button{
+    
+    
+    color:white;
+    background-image: linear-gradient(135deg, #3254a4 10%, #3254a4 100%);
+    border: 0;
+    outline: 0;
+    box-shadow: 0px 4px 2px 0px rgba(0,0,0,.7);
+    font-size: 20px;
+    padding: 12px 5px;
+    margin: 20px;
+    width:100%;
+    
+}
+.container button:hover {
+    background-image: linear-gradient(135deg, #4a1fe4 10%, #0943e2 100%); }
+
+.container .tc span{
+        align-content: center;
+        
+      }
+
+.container .post .tc input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+
+.container .post .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 30px;
+    width: 30px;
+    background-color: #eee;
+    border-radius: 50%;
+  }
+  
+ 
+  /* Style for checked state */
+.container .post .tc  input[type="checkbox"]:checked + .checkmark {
+    background-color: #2196F3;
+  }
+  
+  /* Style for checkmark icon */
+.container span .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Style for checked state of icon */
+.container .tc input[type="checkbox"]:checked + .checkmark:after {
+    display: block;
+  }
+  
+  /* Style for checkmark icon design */
+.container .tc  input[type="checkbox"]:checked + .checkmark:after {
+    left: 7px;
+    top: 3px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
