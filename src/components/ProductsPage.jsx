@@ -1,84 +1,177 @@
-import React from 'react';
-import { Navbar, Nav, Form, FormControl, Button, Container, Row, Col, Card } from 'react-bootstrap';
-import './ProductsPage.css';
-import { Link } from 'react-router-dom';
-import Cookies from 'js-cookie';
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import "./ProductsPage.css";
+import { useNavigate } from "react-router-dom";
 
-const ProductsPage = () => {
-
+function Products() {
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [priceRange, setPriceRange] = useState({ min: "", max: "" });
   const navigate = useNavigate();
+
   
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (!user) {
-      navigate('/login');
-    }
+
+    
+
+
+    fetch("http://localhost:3001/api/products/get-products")
+      .then((response) => response.json())
+      .then((data) => {
+        setProducts(data);
+        setCategories(Array.from(new Set(data.map((p) => p.category))));
+        setPriceRange({
+          min: Math.min(...data.map((p) => p.price)),
+          max: Math.max(...data.map((p) => p.price)),
+        });
+      })
+      .catch((error) => console.error(error));
   }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem('user');
-    
-    navigate("/");
+  const user = JSON.parse(localStorage.getItem("user"));
+  if (!user) {
+    window.alert("Please close this window and login again!");
+    return navigate("/login");
   }
-  
 
-  const products = [
-    { id: 1, title: 'Product 1', price: 29.99, image: 'https://via.placeholder.com/150' },
-    { id: 2, title: 'Product 2', price: 49.99, image: 'https://via.placeholder.com/150' },
-    { id: 3, title: 'Product 3', price: 19.99, image: 'https://via.placeholder.com/150' },
-    // Add more products here in the same format.
-  ];
+
+  const handleCategoryChange = (category) => {
+    const filteredProducts =
+      category === "all"
+        ? products
+        : products.filter((p) => p.category === category);
+    setProducts(filteredProducts);
+  };
+
+  const handlePriceRangeChange = (minPrice, maxPrice) => {
+    const filteredProducts = products.filter(
+      (p) => p.price >= minPrice && p.price <= maxPrice
+    );
+    setProducts(filteredProducts);
+  };
+
+  const handleLogout = () =>{
+    localStorage.setItem('user', null);
+    navigate("/login");
+  }
 
   return (
     <>
-      <Navbar bg="dark" variant="dark" expand="lg">
-        <Container>
-          <Navbar.Brand href="#home">giveItToUs</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <Nav.Link href="#profile">Profile</Nav.Link>
-              <Nav.Link href="#orders">Orders</Nav.Link>
-            </Nav>
-            <Form className="d-flex">
-              <FormControl
-                type="search"
-                placeholder="Search"
-                className="me-2"
-                aria-label="Search"
-              />
-              <Button variant="outline-success">Search</Button>
-            </Form>
-            <Nav.Link href="#cart" className="ms-3">
-              Cart
-            </Nav.Link>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-      <Container className="products-page">
-        <h1 className="giveItToUs-title text-center mb-4">Our Products</h1>
-        <Row>
-          {products.map((product) => (
-            <Col sm={12} md={6} lg={4} xl={3} key={product.id}>
-              <Card className="product-card mb-4">
-                <Card.Img variant="top" src={product.image} />
-                <Card.Body>
-                  <Card.Title>{product.title}</Card.Title>
-                  <Card.Text>Price: ${product.price}</Card.Text>
-                  <Button variant="primary" className="add-to-cart-btn">
-                    Add to Cart
-                  </Button>
-                </Card.Body>
-              </Card>
-            </Col>
-          ))}
-        </Row>
-      </Container>
-      <Button onClick={handleLogout}>logout</Button>
-    </>
-  );
-};
+      <header>
+        <div className="logo">
+          <h2>GiveIToUs</h2>
+        </div>
+        <nav>
+          <ul>
+            <li>
+              <a href="#">Products</a>
+            </li>
+            <li className="account">
+              <a href="#">My Account</a>
+              <ul className="account-dropdown">
+                <li>
+                  <a href="ordhis.html">Order History</a>
+                </li>
+                <li>
+                  <a href="seller_page.html">Sell Product</a>
+                </li>
+                <li>
+                  <a href="#" onClick={() => handleLogout()}>Logout</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="cart.html">Cart</a>
+            </li>
+          </ul>
+        </nav>
+      </header>
 
-export default ProductsPage;
+      <main>
+        <div className="left-card">
+          <h3>Filters</h3>
+          <div className="filter-section">
+            <h4>Category</h4>
+            <div className="category-filters">
+              <label>
+                <input
+                  type="radio"
+                  name="category"
+                  value="all"
+                  checked={categories.length === 0}
+                  onChange={() => handleCategoryChange("all")}
+                />
+                All
+              </label>
+              {categories.map((category) => (
+                <label key={category}>
+                  <input
+                    type="radio"
+                    name="category"
+                    value={category}
+                    onChange={() => handleCategoryChange(category)}
+                  />
+                  {category}
+                </label>
+              ))}
+            </div>
+          </div>
+          <div className="filter-section">
+            <h4>Price Range</h4>
+            <div className="price-range">
+              <label>
+                Min:
+                <input
+                  type="number"
+                  value={priceRange.min}
+                  onChange={(event) =>
+                    setPriceRange({
+                      ...priceRange,
+                      min: event.target.value,
+                    })
+                  }
+                />
+              </label>
+              <label>
+                Max:
+                <input               type="number"
+              value={priceRange.max}
+              onChange={(event) =>
+                setPriceRange({
+                  ...priceRange,
+                  max: event.target.value,
+                })
+              }
+            />
+          </label>
+          <button
+            onClick={() =>
+              handlePriceRangeChange(priceRange.min, priceRange.max)
+            }
+          >
+            Apply
+          </button>
+        </div>
+      </div>
+    </div>
+    <section className="products">
+      {products.map((product) => (
+        <div className="product" key={product.id}>
+          <img src={product.image} alt={product.name} />
+          <h3>{product.name}</h3>
+          <p>${product.price}</p>
+          <button>Add to cart</button>
+        </div>
+      ))}
+    </section>
+  </main>
+
+  <footer>
+    <div className="copyright">
+      <center><b><i><p>Copyright © 2023 Team Errors</p></i></b></center>
+    </div>
+  </footer>
+</>
+);
+}
+
+export default Products;
