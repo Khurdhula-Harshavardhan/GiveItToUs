@@ -13,7 +13,7 @@ function Admin(){
   }
     return(
         <>
-  
+  <link rel="stylesheet" type="text/css" href="Admin.css" />
   <div className="box-form">
     <div className="left">
       <div className="overlay">
