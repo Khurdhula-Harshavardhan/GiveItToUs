@@ -13,6 +13,7 @@ import Seller from './components/Seller';
 import ProductsPage from './components/ProductsPage';
 import SellProducts from './components/SellProducts';
 import Cart from './components/Cart';
+import Orders from './components/Orders';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -27,6 +28,7 @@ root.render(
       <Route path="/products" element={<ProductsPage />} />
       <Route path="/sellproducts" element={<SellProducts />} />
       <Route path="/cart" element={<Cart />} />
+      <Route path="/orders" element={<Orders />} />
     </Routes>
   </Router>
 );

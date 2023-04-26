@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const buyersRouter = require('./routes/buyers');
 const productsRouter = require('./routes/products')
 const cartRouter = require('./routes/carts')
+const ordersRouter = require('./routes/orders')
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -26,6 +27,7 @@ db.once('open', () => {
 app.use('/api/buyers', buyersRouter);
 app.use('/api/products', productsRouter);
 app.use('/api/cart', cartRouter);
+app.use('/api/orders', ordersRouter);
 app.use('/uploads', express.static('uploads'));
 
 const port = process.env.PORT || 3001;

@@ -1,147 +1,73 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "./Cart.css";
+import "./Orders.css";
 
-
-
-const Cart = () => {
-  const [cartItems, setCartItems] = useState([]);
-  const navigate = useNavigate();
+const Orders = () => {
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
   const user = JSON.parse(localStorage.getItem("user"));
-  const [cartKey, setCartKey] = useState(0);
   const username = user.username;
 
-  // Fetch cart items on mount
+  async function fetchProductDetails(productId) {
+    try {
+      const response = await fetch(`http://localhost:3001/api/products/getproduct?productId=${productId}`);
+      const product = await response.json();
+      return product;
+    } catch (error) {
+      console.error('Error fetching product details:', error);
+    }
+  }
+
   useEffect(() => {
-    const fetchCartItems = async () => {
-        if (!user) {
-            window.alert("Please close this window and login again!");
-            return navigate("/login");
-          }
+    const fetchOrders = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3001/api/cart/getAllItemsInCart/${username}`
+          `http://localhost:3001/api/orders/getOrders/${username}`
         );
         const data = await response.json();
-        setCartItems(data);
+        const ordersWithDetails = await Promise.all(
+          data.orders.map(async (order) => {
+            const product = await fetchProductDetails(order.productId);
+            return { ...order, product };
+          })
+        );
+        setOrders(ordersWithDetails);
+        setLoading(false);
       } catch (error) {
         console.error(error);
+        setLoading(false);
       }
     };
-    fetchCartItems();
+    fetchOrders();
   }, [username]);
 
-  // Calculate total price of cart items
-  const totalPrice = cartItems.reduce(
-    (total, item) => total + item.price,
+  const totalPrice = Array.isArray(orders) ? orders.reduce(
+    (total, order) => total + order.product.price,
     0
-  );
+  ) : 0;
 
-  const updateCartItems = (productId) => {
-    setCartItems((prevItems) =>
-      prevItems.filter((item) => item.id !== productId)
-    );
-  };
-
-  // Remove an item from the cart
-  const removeFromCart = async (productId) => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to remove this item from your cart?"
-    );
-    if (confirmDelete) {
-      try {
-        await fetch(
-          `http://localhost:3001/api/cart/dropFromCart/${username}/${productId}`,
-          { method: "DELETE" }
-        );
-
-        setCartItems((prevItems) =>
-          prevItems.filter((item) => item.id !== productId)
-        );
-        updateCartItems(productId);
-        window.alert("This item has been removed from your cart successfully!");
-
-      } catch (error) {
-        console.error(error);
-      }
-    }
-  };
-
-  const hangleSellProduct = () =>{
-    navigate("/sellproducts");
+  if (loading) {
+    return <div>Loading...</div>;
   }
 
-  const handleLogout = () =>{
-    localStorage.setItem('user', null);
-    navigate("/login");
-  }
-
-  
   return (
-    <>
-      <header>
-        <div className="logo">
-          <h2>GiveIToUs</h2>
-        </div>
-        <nav>
-          <ul>
-            <li>
-              <a href="/products">Products</a>
-            </li>
-            <li className="account">
-              <a href="#">My Account</a>
-              <ul className="account-dropdown">
-                <li>
-                  <a href="ordhis.html">Order History</a>
-                </li>
-                <li>
-                  <a onClick={() => hangleSellProduct()}>Sell Product</a>
-                </li>
-                <li>
-                  <a onClick={() => handleLogout()}>Logout</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="#">Cart</a>
-            </li>
-          </ul>
-        </nav>
-      </header>
-    <div className="cart-container">
-  <table className="cart">
-    <thead>
-      <tr>
-        <th>Product</th>
-        <th>Description</th>
-        <th>Price</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      {cartItems.map((item) => (
-        <tr className="cart-item" key={item.id}>
-          <td>{item.name}</td>
-          <td>{item.description}</td>
-          <td>${item.price.toFixed(2)}</td>
-        </tr>
-      ))}
-    </tbody>
-    <tfoot>
-      <tr>
-        <td colSpan="2">Total Expenses:</td>
-        <td colSpan="2">${totalPrice.toFixed(2)}</td>
-      </tr>
-    </tfoot>
-  </table>
-</div>
-<footer>
-    <div className="copyright">
-      <center><b><i><p>Copyright © 2023 Team Errors</p></i></b></center>
+    <div className="orders-container">
+      <table className="orders">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Date of Purchase</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+        </tbody>
+        <tfoot>
+          
+        </tfoot>
+      </table>
     </div>
-  </footer>
-</>
   );
 };
 
-export default Cart;
+export default Orders;

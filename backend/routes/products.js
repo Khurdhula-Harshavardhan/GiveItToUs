@@ -43,6 +43,17 @@ router.get('/get-products', async (req, res) => {
   }
 });
 
+router.get('/getproduct', async (req, res) => {
+  try {
+    const { productId } = req.query;
+    const product = await Product.findById(productId);
+    res.status(200).json(product);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+
 // Handle POST requests to add a new product
 router.post('/sell', upload.array('images', 6), async (req, res) => {
   try {

@@ -76,6 +76,28 @@ const Cart = () => {
     navigate("/login");
   }
 
+  const buyNow = async (productId) => {
+    const currentTime = new Date().toISOString();
+    console.log(username, productId);
+    try {
+      const response = await fetch(`http://localhost:3001/api/orders/buynow`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, productId, dop: currentTime }),
+      });
+      const data = await response.json();
+      window.alert("Order placed successfully!");
+      removeFromCart(productId);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+      console.error(error);
+    }
+  };
+  
+
   
   return (
     <>
@@ -116,6 +138,7 @@ const Cart = () => {
         <th>Description</th>
         <th>Price</th>
         <th>Action</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
@@ -127,6 +150,11 @@ const Cart = () => {
           <td>
             <button onClick={() => removeFromCart(item._id)}>
               Remove from Cart
+            </button>
+          </td>
+          <td>
+            <button onClick={() => buyNow(item._id)}>
+              Buy Now!
             </button>
           </td>
         </tr>
